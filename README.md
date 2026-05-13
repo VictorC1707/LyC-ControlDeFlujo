@@ -1,4 +1,4 @@
-# 💻 Lenguajes y Compiladores - Trimestre 2026-II
+# 💻 Lenguajes y Compiladores 
 
 Repositorio académico oficial del grupo **Control De Flujo** para la gestión de entregables, bitácoras e investigaciones de la asignatura Lenguajes y Compiladores.
 

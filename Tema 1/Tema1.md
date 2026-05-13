@@ -14,7 +14,7 @@ El objetivo de esta investigación es profundizar en los modelos matemáticos qu
 A continuación se presentan los recursos desarrollados por el equipo y sus enlaces de ser requeridos:
 
 * 📝 **Informe de Investigación:**
-* 🎥 **Video de Defensa Grupal (YouTube):** [`Enlace al video de YouTube`] 
+* 🎥 **Video de Defensa Grupal:** [`https://drive.google.com/file/d/1o-u5byDCpNs2ZlnIBFVi86y3SgvsFjfQ/view?usp=sharing`] 
 * 📊 **Material de Apoyo / Presentación:**
 
 ---
