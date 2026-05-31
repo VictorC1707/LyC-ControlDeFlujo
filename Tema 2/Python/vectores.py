@@ -4,7 +4,7 @@ import time
 
 #Configuracion
 
-n = 2000           
+n = 200           
 SEMILLA = 1505171219   
 random.seed(SEMILLA)
 
