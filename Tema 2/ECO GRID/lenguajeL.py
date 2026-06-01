@@ -1,45 +1,67 @@
 import sys
+import time
 import ply.lex as lex
 import ply.yacc as yacc
 
-# ---------- Simulación del hardware ECO-GRID ----------
+# ---------- 1. Simulación del hardware ECO-GRID ----------
 class Microred:
     """Modelo simulado de la microred eléctrica."""
     def __init__(self):
+        # Estado inicial simulado de las baterías
         self.baterias = {
-            'bateria_1': {'carga': 78.5, 'temperatura': 31.2},
-            'bateria_2': {'carga': 42.0, 'temperatura': 55.8},
+            'banco_litio': {'carga': 95.0, 'temperatura': 38.0},
+            'bateria_principal': {'carga': 42.0, 'temperatura': 58.5},
         }
+        # Estado inicial de los relés (contactores)
         self.lineas = {
-            'sector_A': False,  # False = abierto (aislado)
-            'sector_B': True,   # True = cerrado (conectado)
+            'linea_solar': True,
+            'sector_industrial': True,
+            'red_publica': False,
+            'sector_esencial': True,
+            'sector_no_esencial': True
         }
 
+    # Sensores originales
     def leer_temperatura(self, id_bateria):
-        if id_bateria in self.baterias:
-            return self.baterias[id_bateria]['temperatura']
-        raise ValueError(f"Batería desconocida: {id_bateria}")
+        return self.baterias.get(id_bateria, {}).get('temperatura', 0.0)
 
     def estado_carga(self, id_bateria):
-        if id_bateria in self.baterias:
-            return self.baterias[id_bateria]['carga']
-        raise ValueError(f"Batería desconocida: {id_bateria}")
+        return self.baterias.get(id_bateria, {}).get('carga', 0.0)
 
+    # NUEVO: Sensores de flujo de energía (kW)
+    def leer_generacion(self, id_fuente):
+        # Simulamos una generación solar alta para que se active la venta
+        return 150.0 
+
+    def leer_demanda(self, id_sector):
+        # Simulamos un consumo interno menor a la generación
+        return 100.0 
+
+    # Actuadores
     def conmutar_linea(self, sector, estado):
-        if sector in self.lineas:
-            self.lineas[sector] = estado
-        else:
-            raise ValueError(f"Sector desconocido: {sector}")
+        self.lineas[sector] = estado
 
-# Instancia global de la microred
+    def activar_refrigeracion(self, id_bateria, estado):
+        if estado and id_bateria in self.baterias:
+            self.baterias[id_bateria]['temperatura'] -= 2.0 
+
+    def emitir_alerta(self):
+        pass # La lógica visual/sonora se maneja en el intérprete
+
+# Instancia global
 red = Microred()
 
-# ---------- Analizador léxico ----------
+# ---------- 2. Analizador Léxico (Lexer) ----------
 palabras_reservadas = {
     'init_grid': 'INIT_GRID',
     'leer_temperatura': 'LEER_TEMP',
     'estado_carga': 'ESTADO_CARGA',
+    'leer_generacion': 'LEER_GEN',          # NUEVO
+    'leer_demanda': 'LEER_DEM',             # NUEVO
     'conmutar_linea': 'CONMUTAR',
+    'activar_refrigeracion': 'REFRIGERACION', 
+    'emitir_alerta': 'ALERTA',               
+    'esperar': 'ESPERAR',                    
     'si_verdadero': 'SI',
     'entonces': 'ENTONCES',
     'fin_si': 'FIN_SI',
@@ -110,7 +132,7 @@ def t_error(tok):
 
 lexer = lex.lex()
 
-# ---------- Analizador sintáctico ----------
+# ---------- 3. Analizador Sintáctico (Parser) ----------
 precedencia = (
     ('left', 'Y', 'O'),
     ('left', 'IGUAL', 'DISTINTO', 'MENOR', 'MAYOR', 'MENOR_IGUAL', 'MAYOR_IGUAL'),
@@ -138,22 +160,21 @@ def p_sentencia(p):
                  | declaracion_mientras
                  | declaracion_repetir
                  | NUEVA_LINEA"""
-    if len(p) == 3:
-        p[0] = p[1]
-    elif isinstance(p[1], str) and '\n' in p[1]:
-        p[0] = None # Manejo seguro de líneas vacías
-    else:
-        p[0] = p[1]
+    if len(p) == 3: p[0] = p[1]
+    elif isinstance(p[1], str) and '\n' in p[1]: p[0] = None 
+    else: p[0] = p[1]
 
 def p_comando(p):
     """comando : INIT_GRID
-               | LEER_TEMP PAREN_IZQ ID PAREN_DER
-               | ESTADO_CARGA PAREN_IZQ ID PAREN_DER
-               | CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER"""
+               | CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER
+               | REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER
+               | ALERTA
+               | ESPERAR PAREN_IZQ expresion PAREN_DER"""
     if p[1] == 'init_grid': p[0] = ('init_grid',)
-    elif p[1] == 'leer_temperatura': p[0] = ('leer_temperatura', p[3])
-    elif p[1] == 'estado_carga': p[0] = ('estado_carga', p[3])
     elif p[1] == 'conmutar_linea': p[0] = ('conmutar_linea', p[3], p[5])
+    elif p[1] == 'activar_refrigeracion': p[0] = ('refrigeracion', p[3], p[5]) 
+    elif p[1] == 'emitir_alerta': p[0] = ('alerta',)                           
+    elif p[1] == 'esperar': p[0] = ('esperar', p[3])                           
 
 def p_asignacion(p):
     """asignacion : ID ASIGNACION expresion"""
@@ -224,9 +245,13 @@ def p_factor_id(p):
 
 def p_factor_comando(p):
     """factor : LEER_TEMP PAREN_IZQ ID PAREN_DER
-              | ESTADO_CARGA PAREN_IZQ ID PAREN_DER"""
+              | ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+              | LEER_GEN PAREN_IZQ ID PAREN_DER
+              | LEER_DEM PAREN_IZQ ID PAREN_DER"""
     if p[1] == 'leer_temperatura': p[0] = ('leer_temperatura', p[3])
-    else: p[0] = ('estado_carga', p[3])
+    elif p[1] == 'estado_carga': p[0] = ('estado_carga', p[3])
+    elif p[1] == 'leer_generacion': p[0] = ('leer_generacion', p[3])
+    else: p[0] = ('leer_demanda', p[3])
 
 def p_factor_parentesis(p):
     """factor : PAREN_IZQ expresion PAREN_DER"""
@@ -237,14 +262,12 @@ def p_factor_no(p):
     p[0] = ('no', p[2])
 
 def p_error(p):
-    if p:
-        print(f"Error sintáctico en token '{p.value}' (línea {p.lineno})")
-    else:
-        print("Error sintáctico: fin de archivo inesperado")
+    if p: print(f"Error sintáctico en token '{p.value}' (línea {p.lineno})")
+    else: print("Error sintáctico: fin de archivo inesperado")
 
 parser = yacc.yacc()
 
-# ---------- Intérprete ----------
+# ---------- 4. Intérprete y Ejecución del AST ----------
 class Entorno:
     def __init__(self):
         self.variables = {}
@@ -259,40 +282,52 @@ def interpretar(arbol, entorno):
     if arbol is None: return
     if isinstance(arbol, list):
         for sentencia in arbol:
-            if sentencia is not None:
-                interpretar(sentencia, entorno)
+            if sentencia is not None: interpretar(sentencia, entorno)
         return
 
     tipo = arbol[0]
 
     if tipo == 'init_grid':
-        print("[ECO-GRID] Microred inicializada.")
+        print("\n[ECO-GRID] --- BUS DE DATOS INICIALIZADO ---")
         global red
         red = Microred()
-    elif tipo == 'leer_temperatura':
-        temp = red.leer_temperatura(arbol[1])
-        print(f"[ECO-GRID] SENSOR: Temp {arbol[1]} -> {temp}°C")
-        return temp
-    elif tipo == 'estado_carga':
-        carga = red.estado_carga(arbol[1])
-        print(f"[ECO-GRID] SENSOR: Carga {arbol[1]} -> {carga}%")
-        return carga
+        
     elif tipo == 'conmutar_linea':
-        sector, expr_estado = arbol[1], arbol[2]
-        estado = evaluar(expr_estado, entorno)
+        sector, estado = arbol[1], evaluar(arbol[2], entorno)
         red.conmutar_linea(sector, estado)
-        print(f"[ECO-GRID] ACTUADOR: Línea {sector} conmutada a {'CONECTADA' if estado else 'AISLADA'}")
+        print(f"[ACTUADOR] Relé {sector} -> {'CONECTADO' if estado else 'AISLADO'}")
+        
+    elif tipo == 'refrigeracion':
+        bateria, estado = arbol[1], evaluar(arbol[2], entorno)
+        red.activar_refrigeracion(bateria, estado)
+        print(f"[ACTUADOR] Enfriamiento en {bateria} -> {'ENCENDIDO' if estado else 'APAGADO'}")
+        
+    elif tipo == 'alerta':
+        red.emitir_alerta()
+        print("[ALERTA HMI] 🚨 ¡CONDICIÓN CRÍTICA DETECTADA EN LA RED! 🚨")
+        
+    elif tipo == 'esperar':
+        segundos = evaluar(arbol[1], entorno)
+        print(f"[SISTEMA] Pausa operativa ({segundos}s)...")
+        time.sleep(segundos) 
+        
     elif tipo == 'asignar':
         entorno.asignar(arbol[1], evaluar(arbol[2], entorno))
+        
     elif tipo == 'si':
         if evaluar(arbol[1], entorno): interpretar(arbol[2], entorno)
         elif arbol[3] is not None: interpretar(arbol[3], entorno)
+        
     elif tipo == 'mientras':
-        while evaluar(arbol[1], entorno): interpretar(arbol[2], entorno)
+        # Limitamos el bucle infinito a 20 iteraciones para la prueba en terminal
+        seguro = 0
+        while evaluar(arbol[1], entorno) and seguro < 20:
+            interpretar(arbol[2], entorno)
+            seguro += 1
+            if seguro == 20: print("[SISTEMA] Límite de simulación alcanzado. Abortando bucle infinito.")
+            
     elif tipo == 'repetir':
         for _ in range(int(evaluar(arbol[1], entorno))): interpretar(arbol[2], entorno)
-    else:
-        evaluar(arbol, entorno)
 
 def evaluar(expresion, entorno):
     if isinstance(expresion, (int, float, bool)): return expresion
@@ -312,8 +347,24 @@ def evaluar(expresion, entorno):
         if op == 'y': return evaluar(expresion[1], entorno) and evaluar(expresion[2], entorno)
         if op == 'o': return evaluar(expresion[1], entorno) or evaluar(expresion[2], entorno)
         if op == 'no': return not evaluar(expresion[1], entorno)
-        if op == 'leer_temperatura': return red.leer_temperatura(expresion[1])
-        if op == 'estado_carga': return red.estado_carga(expresion[1])
+        
+        # Mapeo de llamadas a sensores físicos (Factores)
+        if op == 'leer_temperatura': 
+            val = red.leer_temperatura(expresion[1])
+            print(f"[SENSOR] Temp {expresion[1]}: {val:.1f}°C")
+            return val
+        if op == 'estado_carga': 
+            val = red.estado_carga(expresion[1])
+            print(f"[SENSOR] SOC {expresion[1]}: {val:.1f}%")
+            return val
+        if op == 'leer_generacion':
+            val = red.leer_generacion(expresion[1])
+            print(f"[SENSOR] Generación {expresion[1]}: {val:.1f} kW")
+            return val
+        if op == 'leer_demanda':
+            val = red.leer_demanda(expresion[1])
+            print(f"[SENSOR] Demanda {expresion[1]}: {val:.1f} kW")
+            return val
     return 0.0
 
 if __name__ == '__main__':
@@ -324,9 +375,7 @@ if __name__ == '__main__':
     with open(sys.argv[1], 'r', encoding='utf-8') as archivo:
         codigo = archivo.read()
 
-    print("\n--- Analizando y Ejecutando Código L ---")
     ast = parser.parse(codigo)
     if ast:
         entorno = Entorno()
         interpretar(ast, entorno)
-    print("--- Fin de la Simulación ---")
