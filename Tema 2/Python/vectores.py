@@ -1,8 +1,11 @@
 import math
 import random
 import time
+import tracemalloc
 
 #Configuracion
+
+tracemalloc.start()
 
 n = 200           
 SEMILLA = 1505171219   
@@ -51,6 +54,12 @@ fin = time.perf_counter()
 
 tiempo_ms = (fin- inicio) * 1000.0
 
+memoria_actual, memoria_pico = tracemalloc.get_traced_memory()
+tracemalloc.stop()
+
+pico_en_mb= memoria_pico / (1024 * 1024)
+
 print(f"Suma de partes reales:      {suma_real}")
 print(f"Suma de partes imaginarias: {suma_imag}")
 print(f"\nTiempo de cálculo: {tiempo_ms:.6f} ms")
+print(f"Memoria pico: {pico_en_mb:.6f} MB")
