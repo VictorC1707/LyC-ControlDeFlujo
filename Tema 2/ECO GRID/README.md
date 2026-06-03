@@ -29,3 +29,68 @@ Ejecuta el siguiente comando en tu terminal para instalar el motor de análisis 
 
 ```bash
 pip install ply
+```
+(Nota: Si usas entornos virtuales, recuerda activarlo antes de instalar la dependencia).
+
+## 🚀 Uso y Ejecución
+El intérprete toma como entrada archivos de texto con el código escrito en Lenguaje L (se recomienda la extensión .l por convención).
+
+Para ejecutar una rutina, abre tu terminal en la carpeta donde tienes los archivos y utiliza el siguiente comando:
+
+```bash
+python lenguajeL.py ruta/al/script.l
+```
+Ejemplo Práctico: Prevención de Fuga Térmica
+Puedes crear un archivo llamado emergencia.l con el siguiente código y ejecutarlo para ver la simulación en acción:
+
+```bash
+init_grid
+temp_critica = 55.0
+
+mientras verdadero == verdadero ejecutar
+    temp_actual = leer_temperatura(bateria_principal)
+    
+    si_verdadero temp_actual >= temp_critica entonces
+        activar_refrigeracion(bateria_principal, verdadero)
+        conmutar_linea(linea_solar, falso)
+        emitir_alerta
+    sino
+        activar_refrigeracion(bateria_principal, falso)
+    fin_si
+    
+    esperar(1)
+fin_mientras
+```
+## 📚 Referencia Rápida del Léxico
+Primitivas del Sistema (Sensores y Actuadores)
+init_grid: Inicializa el bus de datos de la microred.
+
+leer_temperatura(ID): Devuelve la temperatura de una celda en °C.
+
+estado_carga(ID): Devuelve el nivel de almacenamiento (SOC) en %.
+
+leer_generacion(ID): Mide la inyección de potencia (kW) de fuentes renovables.
+
+leer_demanda(ID): Mide el consumo eléctrico (kW) de un sector.
+
+conmutar_linea(ID, estado): Activa (verdadero) o aísla (falso) relés mecánicos.
+
+activar_refrigeracion(ID, estado): Controla el sistema de enfriamiento térmico.
+
+emitir_alerta: Activa alarmas visuales/sonoras en el sistema HMI.
+
+esperar(segundos): Pausa operativa para estabilización del hardware.
+
+### Estructuras de Control de Flujo
+Bifurcación: si_verdadero ... entonces ... [sino ...] fin_si
+
+Vigilancia Continua: mientras ... ejecutar ... fin_mientras
+
+Ciclo Fijo: repetir ... veces ... fin_repetir
+
+### Operadores
+Lógicos: y, o, no
+
+Relacionales: ==, !=, <, >, <=, >=
+
+Aritméticos: +, -, *, /
