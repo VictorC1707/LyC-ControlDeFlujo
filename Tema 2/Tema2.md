@@ -11,6 +11,6 @@ Este repositorio contiene el informe académico, el código fuente de los benchm
 A continuación se presentan los recursos desarrollados por el equipo y sus enlaces de ser requeridos:
 
 * 📝 **Informe de Investigación:**
-* 🎥 **Video de Defensa Grupal:** [``] 
+* 🎥 **Video de Defensa Grupal:** [`https://drive.google.com/file/d/1rGES90P3kv42MXyKsaJQ7fbhkzeFVG_n/view?usp=sharing`] 
 
 ---
