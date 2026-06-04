@@ -27,7 +27,7 @@ Repositorio académico oficial del grupo **Control De Flujo** para la gestión d
 En cumplimiento con los lineamientos de evaluación, este repositorio se encuentra estructurado en carpetas diferenciadas por cada tema evaluativo. Dentro de cada directorio se alojarán las versiones finales de los entregables, material de apoyo y enlaces de referencia.
 
 * 📁 `/Tema1` - Introducción a los Lenguajes y Compiladores.
-* 📁 `/Tema2` - (Próximamente)
+* 📁 `/Tema2` - Lenguajes de Programación
 * 📁 `/Tema3` - (Próximamente)
 
 >"La programación es un hermoso proceso cognitivo que no es solo decirle a una máquina qué hacer, es aprender a comunicarte con claridad en un universo que no perdona errores."
