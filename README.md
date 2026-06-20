@@ -28,6 +28,6 @@ En cumplimiento con los lineamientos de evaluación, este repositorio se encuent
 
 * 📁 `/Tema1` - Introducción a los Lenguajes y Compiladores.
 * 📁 `/Tema2` - Lenguajes de Programación
-* 📁 `/Tema3` - (Próximamente)
+* 📁 `/Tema3` - Lenguajes y Gramáticas Formales
 
 >"La programación es un hermoso proceso cognitivo que no es solo decirle a una máquina qué hacer, es aprender a comunicarte con claridad en un universo que no perdona errores."
