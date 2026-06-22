@@ -18,6 +18,6 @@ El proyecto está dividido en cuatro directorios principales, correspondientes a
 A continuación se presentan los recursos desarrollados por el equipo y sus enlaces de ser requeridos:
 
 * 📝 **Informe de Investigación:**
-* 🎥 **Video de Defensa Grupal:** [`https://drive.google.com/f`] 
+* 🎥 **Video de Defensa Grupal:** [`https://drive.google.com/file/d/1BrTRtNLK9V6V4vSmF6jdXlYmR9RGvPMx/view?usp=sharing`] 
 
 ---
