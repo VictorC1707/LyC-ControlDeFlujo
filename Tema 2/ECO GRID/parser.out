@@ -1,0 +1,2516 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> lista_sentencias
+Rule 2     lista_sentencias -> sentencia
+Rule 3     lista_sentencias -> lista_sentencias sentencia
+Rule 4     sentencia -> comando NUEVA_LINEA
+Rule 5     sentencia -> asignacion NUEVA_LINEA
+Rule 6     sentencia -> declaracion_si
+Rule 7     sentencia -> declaracion_mientras
+Rule 8     sentencia -> declaracion_repetir
+Rule 9     sentencia -> NUEVA_LINEA
+Rule 10    comando -> INIT_GRID
+Rule 11    comando -> CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER
+Rule 12    comando -> REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER
+Rule 13    comando -> ALERTA
+Rule 14    comando -> ESPERAR PAREN_IZQ expresion PAREN_DER
+Rule 15    asignacion -> ID ASIGNACION expresion
+Rule 16    declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+Rule 17    declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+Rule 18    declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+Rule 19    declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+Rule 20    expresion -> expresion_logica
+Rule 21    expresion_logica -> expresion_relacional
+Rule 22    expresion_logica -> expresion_logica Y expresion_relacional
+Rule 23    expresion_logica -> expresion_logica O expresion_relacional
+Rule 24    expresion_relacional -> expresion_aritmetica
+Rule 25    expresion_relacional -> expresion_aritmetica IGUAL expresion_aritmetica
+Rule 26    expresion_relacional -> expresion_aritmetica DISTINTO expresion_aritmetica
+Rule 27    expresion_relacional -> expresion_aritmetica MENOR expresion_aritmetica
+Rule 28    expresion_relacional -> expresion_aritmetica MAYOR expresion_aritmetica
+Rule 29    expresion_relacional -> expresion_aritmetica MENOR_IGUAL expresion_aritmetica
+Rule 30    expresion_relacional -> expresion_aritmetica MAYOR_IGUAL expresion_aritmetica
+Rule 31    expresion_aritmetica -> termino
+Rule 32    expresion_aritmetica -> expresion_aritmetica MAS termino
+Rule 33    expresion_aritmetica -> expresion_aritmetica MENOS termino
+Rule 34    termino -> factor
+Rule 35    termino -> termino POR factor
+Rule 36    termino -> termino ENTRE factor
+Rule 37    factor -> ENTERO
+Rule 38    factor -> FLOTANTE
+Rule 39    factor -> VERDADERO
+Rule 40    factor -> FALSO
+Rule 41    factor -> ID
+Rule 42    factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER
+Rule 43    factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+Rule 44    factor -> LEER_GEN PAREN_IZQ ID PAREN_DER
+Rule 45    factor -> LEER_DEM PAREN_IZQ ID PAREN_DER
+Rule 46    factor -> PAREN_IZQ expresion PAREN_DER
+Rule 47    factor -> NO factor
+
+Terminals, with rules where they appear
+
+ALERTA               : 13
+ASIGNACION           : 15
+COMA                 : 11 12
+CONMUTAR             : 11
+DISTINTO             : 26
+EJECUTAR             : 18
+ENTERO               : 37
+ENTONCES             : 16 17
+ENTRE                : 36
+ESPERAR              : 14
+ESTADO_CARGA         : 43
+FALSO                : 40
+FIN_MIENTRAS         : 18
+FIN_REPETIR          : 19
+FIN_SI               : 16 17
+FLOTANTE             : 38
+ID                   : 11 12 15 41 42 43 44 45
+IGUAL                : 25
+INIT_GRID            : 10
+LEER_DEM             : 45
+LEER_GEN             : 44
+LEER_TEMP            : 42
+MAS                  : 32
+MAYOR                : 28
+MAYOR_IGUAL          : 30
+MENOR                : 27
+MENOR_IGUAL          : 29
+MENOS                : 33
+MIENTRAS             : 18
+NO                   : 47
+NUEVA_LINEA          : 4 5 9 16 17 17 18 19
+O                    : 23
+PAREN_DER            : 11 12 14 42 43 44 45 46
+PAREN_IZQ            : 11 12 14 42 43 44 45 46
+POR                  : 35
+REFRIGERACION        : 12
+REPETIR              : 19
+SI                   : 16 17
+SINO                 : 17
+VECES                : 19
+VERDADERO            : 39
+Y                    : 22
+error                : 
+
+Nonterminals, with rules where they appear
+
+asignacion           : 5
+comando              : 4
+declaracion_mientras : 7
+declaracion_repetir  : 8
+declaracion_si       : 6
+expresion            : 11 12 14 15 16 17 18 19 46
+expresion_aritmetica : 24 25 25 26 26 27 27 28 28 29 29 30 30 32 33
+expresion_logica     : 20 22 23
+expresion_relacional : 21 22 23
+factor               : 34 35 36 47
+lista_sentencias     : 1 3 16 17 17 18 19
+programa             : 0
+sentencia            : 2 3
+termino              : 31 32 33 35 36
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . lista_sentencias
+    (2) lista_sentencias -> . sentencia
+    (3) lista_sentencias -> . lista_sentencias sentencia
+    (4) sentencia -> . comando NUEVA_LINEA
+    (5) sentencia -> . asignacion NUEVA_LINEA
+    (6) sentencia -> . declaracion_si
+    (7) sentencia -> . declaracion_mientras
+    (8) sentencia -> . declaracion_repetir
+    (9) sentencia -> . NUEVA_LINEA
+    (10) comando -> . INIT_GRID
+    (11) comando -> . CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER
+    (12) comando -> . REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER
+    (13) comando -> . ALERTA
+    (14) comando -> . ESPERAR PAREN_IZQ expresion PAREN_DER
+    (15) asignacion -> . ID ASIGNACION expresion
+    (16) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (18) declaracion_mientras -> . MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+    (19) declaracion_repetir -> . REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+
+    NUEVA_LINEA     shift and go to state 5
+    INIT_GRID       shift and go to state 10
+    CONMUTAR        shift and go to state 11
+    REFRIGERACION   shift and go to state 13
+    ALERTA          shift and go to state 14
+    ESPERAR         shift and go to state 15
+    ID              shift and go to state 12
+    SI              shift and go to state 16
+    MIENTRAS        shift and go to state 17
+    REPETIR         shift and go to state 18
+
+    programa                       shift and go to state 1
+    lista_sentencias               shift and go to state 2
+    sentencia                      shift and go to state 3
+    comando                        shift and go to state 4
+    asignacion                     shift and go to state 6
+    declaracion_si                 shift and go to state 7
+    declaracion_mientras           shift and go to state 8
+    declaracion_repetir            shift and go to state 9
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> lista_sentencias .
+    (3) lista_sentencias -> lista_sentencias . sentencia
+    (4) sentencia -> . comando NUEVA_LINEA
+    (5) sentencia -> . asignacion NUEVA_LINEA
+    (6) sentencia -> . declaracion_si
+    (7) sentencia -> . declaracion_mientras
+    (8) sentencia -> . declaracion_repetir
+    (9) sentencia -> . NUEVA_LINEA
+    (10) comando -> . INIT_GRID
+    (11) comando -> . CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER
+    (12) comando -> . REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER
+    (13) comando -> . ALERTA
+    (14) comando -> . ESPERAR PAREN_IZQ expresion PAREN_DER
+    (15) asignacion -> . ID ASIGNACION expresion
+    (16) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (18) declaracion_mientras -> . MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+    (19) declaracion_repetir -> . REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+
+    $end            reduce using rule 1 (programa -> lista_sentencias .)
+    NUEVA_LINEA     shift and go to state 5
+    INIT_GRID       shift and go to state 10
+    CONMUTAR        shift and go to state 11
+    REFRIGERACION   shift and go to state 13
+    ALERTA          shift and go to state 14
+    ESPERAR         shift and go to state 15
+    ID              shift and go to state 12
+    SI              shift and go to state 16
+    MIENTRAS        shift and go to state 17
+    REPETIR         shift and go to state 18
+
+    sentencia                      shift and go to state 19
+    comando                        shift and go to state 4
+    asignacion                     shift and go to state 6
+    declaracion_si                 shift and go to state 7
+    declaracion_mientras           shift and go to state 8
+    declaracion_repetir            shift and go to state 9
+
+state 3
+
+    (2) lista_sentencias -> sentencia .
+
+    NUEVA_LINEA     reduce using rule 2 (lista_sentencias -> sentencia .)
+    INIT_GRID       reduce using rule 2 (lista_sentencias -> sentencia .)
+    CONMUTAR        reduce using rule 2 (lista_sentencias -> sentencia .)
+    REFRIGERACION   reduce using rule 2 (lista_sentencias -> sentencia .)
+    ALERTA          reduce using rule 2 (lista_sentencias -> sentencia .)
+    ESPERAR         reduce using rule 2 (lista_sentencias -> sentencia .)
+    ID              reduce using rule 2 (lista_sentencias -> sentencia .)
+    SI              reduce using rule 2 (lista_sentencias -> sentencia .)
+    MIENTRAS        reduce using rule 2 (lista_sentencias -> sentencia .)
+    REPETIR         reduce using rule 2 (lista_sentencias -> sentencia .)
+    $end            reduce using rule 2 (lista_sentencias -> sentencia .)
+    FIN_SI          reduce using rule 2 (lista_sentencias -> sentencia .)
+    SINO            reduce using rule 2 (lista_sentencias -> sentencia .)
+    FIN_MIENTRAS    reduce using rule 2 (lista_sentencias -> sentencia .)
+    FIN_REPETIR     reduce using rule 2 (lista_sentencias -> sentencia .)
+
+
+state 4
+
+    (4) sentencia -> comando . NUEVA_LINEA
+
+    NUEVA_LINEA     shift and go to state 20
+
+
+state 5
+
+    (9) sentencia -> NUEVA_LINEA .
+
+    NUEVA_LINEA     reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    INIT_GRID       reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    CONMUTAR        reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    REFRIGERACION   reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    ALERTA          reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    ESPERAR         reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    ID              reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    SI              reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    MIENTRAS        reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    REPETIR         reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    $end            reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    FIN_SI          reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    SINO            reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    FIN_MIENTRAS    reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+    FIN_REPETIR     reduce using rule 9 (sentencia -> NUEVA_LINEA .)
+
+
+state 6
+
+    (5) sentencia -> asignacion . NUEVA_LINEA
+
+    NUEVA_LINEA     shift and go to state 21
+
+
+state 7
+
+    (6) sentencia -> declaracion_si .
+
+    NUEVA_LINEA     reduce using rule 6 (sentencia -> declaracion_si .)
+    INIT_GRID       reduce using rule 6 (sentencia -> declaracion_si .)
+    CONMUTAR        reduce using rule 6 (sentencia -> declaracion_si .)
+    REFRIGERACION   reduce using rule 6 (sentencia -> declaracion_si .)
+    ALERTA          reduce using rule 6 (sentencia -> declaracion_si .)
+    ESPERAR         reduce using rule 6 (sentencia -> declaracion_si .)
+    ID              reduce using rule 6 (sentencia -> declaracion_si .)
+    SI              reduce using rule 6 (sentencia -> declaracion_si .)
+    MIENTRAS        reduce using rule 6 (sentencia -> declaracion_si .)
+    REPETIR         reduce using rule 6 (sentencia -> declaracion_si .)
+    $end            reduce using rule 6 (sentencia -> declaracion_si .)
+    FIN_SI          reduce using rule 6 (sentencia -> declaracion_si .)
+    SINO            reduce using rule 6 (sentencia -> declaracion_si .)
+    FIN_MIENTRAS    reduce using rule 6 (sentencia -> declaracion_si .)
+    FIN_REPETIR     reduce using rule 6 (sentencia -> declaracion_si .)
+
+
+state 8
+
+    (7) sentencia -> declaracion_mientras .
+
+    NUEVA_LINEA     reduce using rule 7 (sentencia -> declaracion_mientras .)
+    INIT_GRID       reduce using rule 7 (sentencia -> declaracion_mientras .)
+    CONMUTAR        reduce using rule 7 (sentencia -> declaracion_mientras .)
+    REFRIGERACION   reduce using rule 7 (sentencia -> declaracion_mientras .)
+    ALERTA          reduce using rule 7 (sentencia -> declaracion_mientras .)
+    ESPERAR         reduce using rule 7 (sentencia -> declaracion_mientras .)
+    ID              reduce using rule 7 (sentencia -> declaracion_mientras .)
+    SI              reduce using rule 7 (sentencia -> declaracion_mientras .)
+    MIENTRAS        reduce using rule 7 (sentencia -> declaracion_mientras .)
+    REPETIR         reduce using rule 7 (sentencia -> declaracion_mientras .)
+    $end            reduce using rule 7 (sentencia -> declaracion_mientras .)
+    FIN_SI          reduce using rule 7 (sentencia -> declaracion_mientras .)
+    SINO            reduce using rule 7 (sentencia -> declaracion_mientras .)
+    FIN_MIENTRAS    reduce using rule 7 (sentencia -> declaracion_mientras .)
+    FIN_REPETIR     reduce using rule 7 (sentencia -> declaracion_mientras .)
+
+
+state 9
+
+    (8) sentencia -> declaracion_repetir .
+
+    NUEVA_LINEA     reduce using rule 8 (sentencia -> declaracion_repetir .)
+    INIT_GRID       reduce using rule 8 (sentencia -> declaracion_repetir .)
+    CONMUTAR        reduce using rule 8 (sentencia -> declaracion_repetir .)
+    REFRIGERACION   reduce using rule 8 (sentencia -> declaracion_repetir .)
+    ALERTA          reduce using rule 8 (sentencia -> declaracion_repetir .)
+    ESPERAR         reduce using rule 8 (sentencia -> declaracion_repetir .)
+    ID              reduce using rule 8 (sentencia -> declaracion_repetir .)
+    SI              reduce using rule 8 (sentencia -> declaracion_repetir .)
+    MIENTRAS        reduce using rule 8 (sentencia -> declaracion_repetir .)
+    REPETIR         reduce using rule 8 (sentencia -> declaracion_repetir .)
+    $end            reduce using rule 8 (sentencia -> declaracion_repetir .)
+    FIN_SI          reduce using rule 8 (sentencia -> declaracion_repetir .)
+    SINO            reduce using rule 8 (sentencia -> declaracion_repetir .)
+    FIN_MIENTRAS    reduce using rule 8 (sentencia -> declaracion_repetir .)
+    FIN_REPETIR     reduce using rule 8 (sentencia -> declaracion_repetir .)
+
+
+state 10
+
+    (10) comando -> INIT_GRID .
+
+    NUEVA_LINEA     reduce using rule 10 (comando -> INIT_GRID .)
+
+
+state 11
+
+    (11) comando -> CONMUTAR . PAREN_IZQ ID COMA expresion PAREN_DER
+
+    PAREN_IZQ       shift and go to state 22
+
+
+state 12
+
+    (15) asignacion -> ID . ASIGNACION expresion
+
+    ASIGNACION      shift and go to state 23
+
+
+state 13
+
+    (12) comando -> REFRIGERACION . PAREN_IZQ ID COMA expresion PAREN_DER
+
+    PAREN_IZQ       shift and go to state 24
+
+
+state 14
+
+    (13) comando -> ALERTA .
+
+    NUEVA_LINEA     reduce using rule 13 (comando -> ALERTA .)
+
+
+state 15
+
+    (14) comando -> ESPERAR . PAREN_IZQ expresion PAREN_DER
+
+    PAREN_IZQ       shift and go to state 25
+
+
+state 16
+
+    (16) declaracion_si -> SI . expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> SI . expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (20) expresion -> . expresion_logica
+    (21) expresion_logica -> . expresion_relacional
+    (22) expresion_logica -> . expresion_logica Y expresion_relacional
+    (23) expresion_logica -> . expresion_logica O expresion_relacional
+    (24) expresion_relacional -> . expresion_aritmetica
+    (25) expresion_relacional -> . expresion_aritmetica IGUAL expresion_aritmetica
+    (26) expresion_relacional -> . expresion_aritmetica DISTINTO expresion_aritmetica
+    (27) expresion_relacional -> . expresion_aritmetica MENOR expresion_aritmetica
+    (28) expresion_relacional -> . expresion_aritmetica MAYOR expresion_aritmetica
+    (29) expresion_relacional -> . expresion_aritmetica MENOR_IGUAL expresion_aritmetica
+    (30) expresion_relacional -> . expresion_aritmetica MAYOR_IGUAL expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion                      shift and go to state 26
+    expresion_logica               shift and go to state 27
+    expresion_relacional           shift and go to state 28
+    expresion_aritmetica           shift and go to state 29
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 17
+
+    (18) declaracion_mientras -> MIENTRAS . expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+    (20) expresion -> . expresion_logica
+    (21) expresion_logica -> . expresion_relacional
+    (22) expresion_logica -> . expresion_logica Y expresion_relacional
+    (23) expresion_logica -> . expresion_logica O expresion_relacional
+    (24) expresion_relacional -> . expresion_aritmetica
+    (25) expresion_relacional -> . expresion_aritmetica IGUAL expresion_aritmetica
+    (26) expresion_relacional -> . expresion_aritmetica DISTINTO expresion_aritmetica
+    (27) expresion_relacional -> . expresion_aritmetica MENOR expresion_aritmetica
+    (28) expresion_relacional -> . expresion_aritmetica MAYOR expresion_aritmetica
+    (29) expresion_relacional -> . expresion_aritmetica MENOR_IGUAL expresion_aritmetica
+    (30) expresion_relacional -> . expresion_aritmetica MAYOR_IGUAL expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion                      shift and go to state 43
+    expresion_logica               shift and go to state 27
+    expresion_relacional           shift and go to state 28
+    expresion_aritmetica           shift and go to state 29
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 18
+
+    (19) declaracion_repetir -> REPETIR . expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+    (20) expresion -> . expresion_logica
+    (21) expresion_logica -> . expresion_relacional
+    (22) expresion_logica -> . expresion_logica Y expresion_relacional
+    (23) expresion_logica -> . expresion_logica O expresion_relacional
+    (24) expresion_relacional -> . expresion_aritmetica
+    (25) expresion_relacional -> . expresion_aritmetica IGUAL expresion_aritmetica
+    (26) expresion_relacional -> . expresion_aritmetica DISTINTO expresion_aritmetica
+    (27) expresion_relacional -> . expresion_aritmetica MENOR expresion_aritmetica
+    (28) expresion_relacional -> . expresion_aritmetica MAYOR expresion_aritmetica
+    (29) expresion_relacional -> . expresion_aritmetica MENOR_IGUAL expresion_aritmetica
+    (30) expresion_relacional -> . expresion_aritmetica MAYOR_IGUAL expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion                      shift and go to state 44
+    expresion_logica               shift and go to state 27
+    expresion_relacional           shift and go to state 28
+    expresion_aritmetica           shift and go to state 29
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 19
+
+    (3) lista_sentencias -> lista_sentencias sentencia .
+
+    NUEVA_LINEA     reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    INIT_GRID       reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    CONMUTAR        reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    REFRIGERACION   reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    ALERTA          reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    ESPERAR         reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    ID              reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    SI              reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    MIENTRAS        reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    REPETIR         reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    $end            reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    FIN_SI          reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    SINO            reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    FIN_MIENTRAS    reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+    FIN_REPETIR     reduce using rule 3 (lista_sentencias -> lista_sentencias sentencia .)
+
+
+state 20
+
+    (4) sentencia -> comando NUEVA_LINEA .
+
+    NUEVA_LINEA     reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    INIT_GRID       reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    CONMUTAR        reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    REFRIGERACION   reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    ALERTA          reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    ESPERAR         reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    ID              reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    SI              reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    MIENTRAS        reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    REPETIR         reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    $end            reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    FIN_SI          reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    SINO            reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    FIN_MIENTRAS    reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+    FIN_REPETIR     reduce using rule 4 (sentencia -> comando NUEVA_LINEA .)
+
+
+state 21
+
+    (5) sentencia -> asignacion NUEVA_LINEA .
+
+    NUEVA_LINEA     reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    INIT_GRID       reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    CONMUTAR        reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    REFRIGERACION   reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    ALERTA          reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    ESPERAR         reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    ID              reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    SI              reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    MIENTRAS        reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    REPETIR         reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    $end            reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    FIN_SI          reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    SINO            reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    FIN_MIENTRAS    reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+    FIN_REPETIR     reduce using rule 5 (sentencia -> asignacion NUEVA_LINEA .)
+
+
+state 22
+
+    (11) comando -> CONMUTAR PAREN_IZQ . ID COMA expresion PAREN_DER
+
+    ID              shift and go to state 45
+
+
+state 23
+
+    (15) asignacion -> ID ASIGNACION . expresion
+    (20) expresion -> . expresion_logica
+    (21) expresion_logica -> . expresion_relacional
+    (22) expresion_logica -> . expresion_logica Y expresion_relacional
+    (23) expresion_logica -> . expresion_logica O expresion_relacional
+    (24) expresion_relacional -> . expresion_aritmetica
+    (25) expresion_relacional -> . expresion_aritmetica IGUAL expresion_aritmetica
+    (26) expresion_relacional -> . expresion_aritmetica DISTINTO expresion_aritmetica
+    (27) expresion_relacional -> . expresion_aritmetica MENOR expresion_aritmetica
+    (28) expresion_relacional -> . expresion_aritmetica MAYOR expresion_aritmetica
+    (29) expresion_relacional -> . expresion_aritmetica MENOR_IGUAL expresion_aritmetica
+    (30) expresion_relacional -> . expresion_aritmetica MAYOR_IGUAL expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion                      shift and go to state 46
+    expresion_logica               shift and go to state 27
+    expresion_relacional           shift and go to state 28
+    expresion_aritmetica           shift and go to state 29
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 24
+
+    (12) comando -> REFRIGERACION PAREN_IZQ . ID COMA expresion PAREN_DER
+
+    ID              shift and go to state 47
+
+
+state 25
+
+    (14) comando -> ESPERAR PAREN_IZQ . expresion PAREN_DER
+    (20) expresion -> . expresion_logica
+    (21) expresion_logica -> . expresion_relacional
+    (22) expresion_logica -> . expresion_logica Y expresion_relacional
+    (23) expresion_logica -> . expresion_logica O expresion_relacional
+    (24) expresion_relacional -> . expresion_aritmetica
+    (25) expresion_relacional -> . expresion_aritmetica IGUAL expresion_aritmetica
+    (26) expresion_relacional -> . expresion_aritmetica DISTINTO expresion_aritmetica
+    (27) expresion_relacional -> . expresion_aritmetica MENOR expresion_aritmetica
+    (28) expresion_relacional -> . expresion_aritmetica MAYOR expresion_aritmetica
+    (29) expresion_relacional -> . expresion_aritmetica MENOR_IGUAL expresion_aritmetica
+    (30) expresion_relacional -> . expresion_aritmetica MAYOR_IGUAL expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion                      shift and go to state 48
+    expresion_logica               shift and go to state 27
+    expresion_relacional           shift and go to state 28
+    expresion_aritmetica           shift and go to state 29
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 26
+
+    (16) declaracion_si -> SI expresion . ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> SI expresion . ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+
+    ENTONCES        shift and go to state 49
+
+
+state 27
+
+    (20) expresion -> expresion_logica .
+    (22) expresion_logica -> expresion_logica . Y expresion_relacional
+    (23) expresion_logica -> expresion_logica . O expresion_relacional
+
+    ENTONCES        reduce using rule 20 (expresion -> expresion_logica .)
+    EJECUTAR        reduce using rule 20 (expresion -> expresion_logica .)
+    VECES           reduce using rule 20 (expresion -> expresion_logica .)
+    NUEVA_LINEA     reduce using rule 20 (expresion -> expresion_logica .)
+    PAREN_DER       reduce using rule 20 (expresion -> expresion_logica .)
+    Y               shift and go to state 50
+    O               shift and go to state 51
+
+
+state 28
+
+    (21) expresion_logica -> expresion_relacional .
+
+    Y               reduce using rule 21 (expresion_logica -> expresion_relacional .)
+    O               reduce using rule 21 (expresion_logica -> expresion_relacional .)
+    ENTONCES        reduce using rule 21 (expresion_logica -> expresion_relacional .)
+    EJECUTAR        reduce using rule 21 (expresion_logica -> expresion_relacional .)
+    VECES           reduce using rule 21 (expresion_logica -> expresion_relacional .)
+    NUEVA_LINEA     reduce using rule 21 (expresion_logica -> expresion_relacional .)
+    PAREN_DER       reduce using rule 21 (expresion_logica -> expresion_relacional .)
+
+
+state 29
+
+    (24) expresion_relacional -> expresion_aritmetica .
+    (25) expresion_relacional -> expresion_aritmetica . IGUAL expresion_aritmetica
+    (26) expresion_relacional -> expresion_aritmetica . DISTINTO expresion_aritmetica
+    (27) expresion_relacional -> expresion_aritmetica . MENOR expresion_aritmetica
+    (28) expresion_relacional -> expresion_aritmetica . MAYOR expresion_aritmetica
+    (29) expresion_relacional -> expresion_aritmetica . MENOR_IGUAL expresion_aritmetica
+    (30) expresion_relacional -> expresion_aritmetica . MAYOR_IGUAL expresion_aritmetica
+    (32) expresion_aritmetica -> expresion_aritmetica . MAS termino
+    (33) expresion_aritmetica -> expresion_aritmetica . MENOS termino
+
+    Y               reduce using rule 24 (expresion_relacional -> expresion_aritmetica .)
+    O               reduce using rule 24 (expresion_relacional -> expresion_aritmetica .)
+    ENTONCES        reduce using rule 24 (expresion_relacional -> expresion_aritmetica .)
+    EJECUTAR        reduce using rule 24 (expresion_relacional -> expresion_aritmetica .)
+    VECES           reduce using rule 24 (expresion_relacional -> expresion_aritmetica .)
+    NUEVA_LINEA     reduce using rule 24 (expresion_relacional -> expresion_aritmetica .)
+    PAREN_DER       reduce using rule 24 (expresion_relacional -> expresion_aritmetica .)
+    IGUAL           shift and go to state 52
+    DISTINTO        shift and go to state 53
+    MENOR           shift and go to state 54
+    MAYOR           shift and go to state 55
+    MENOR_IGUAL     shift and go to state 56
+    MAYOR_IGUAL     shift and go to state 57
+    MAS             shift and go to state 58
+    MENOS           shift and go to state 59
+
+
+state 30
+
+    (31) expresion_aritmetica -> termino .
+    (35) termino -> termino . POR factor
+    (36) termino -> termino . ENTRE factor
+
+    IGUAL           reduce using rule 31 (expresion_aritmetica -> termino .)
+    DISTINTO        reduce using rule 31 (expresion_aritmetica -> termino .)
+    MENOR           reduce using rule 31 (expresion_aritmetica -> termino .)
+    MAYOR           reduce using rule 31 (expresion_aritmetica -> termino .)
+    MENOR_IGUAL     reduce using rule 31 (expresion_aritmetica -> termino .)
+    MAYOR_IGUAL     reduce using rule 31 (expresion_aritmetica -> termino .)
+    MAS             reduce using rule 31 (expresion_aritmetica -> termino .)
+    MENOS           reduce using rule 31 (expresion_aritmetica -> termino .)
+    Y               reduce using rule 31 (expresion_aritmetica -> termino .)
+    O               reduce using rule 31 (expresion_aritmetica -> termino .)
+    ENTONCES        reduce using rule 31 (expresion_aritmetica -> termino .)
+    EJECUTAR        reduce using rule 31 (expresion_aritmetica -> termino .)
+    VECES           reduce using rule 31 (expresion_aritmetica -> termino .)
+    NUEVA_LINEA     reduce using rule 31 (expresion_aritmetica -> termino .)
+    PAREN_DER       reduce using rule 31 (expresion_aritmetica -> termino .)
+    POR             shift and go to state 60
+    ENTRE           shift and go to state 61
+
+
+state 31
+
+    (34) termino -> factor .
+
+    POR             reduce using rule 34 (termino -> factor .)
+    ENTRE           reduce using rule 34 (termino -> factor .)
+    IGUAL           reduce using rule 34 (termino -> factor .)
+    DISTINTO        reduce using rule 34 (termino -> factor .)
+    MENOR           reduce using rule 34 (termino -> factor .)
+    MAYOR           reduce using rule 34 (termino -> factor .)
+    MENOR_IGUAL     reduce using rule 34 (termino -> factor .)
+    MAYOR_IGUAL     reduce using rule 34 (termino -> factor .)
+    MAS             reduce using rule 34 (termino -> factor .)
+    MENOS           reduce using rule 34 (termino -> factor .)
+    Y               reduce using rule 34 (termino -> factor .)
+    O               reduce using rule 34 (termino -> factor .)
+    ENTONCES        reduce using rule 34 (termino -> factor .)
+    EJECUTAR        reduce using rule 34 (termino -> factor .)
+    VECES           reduce using rule 34 (termino -> factor .)
+    NUEVA_LINEA     reduce using rule 34 (termino -> factor .)
+    PAREN_DER       reduce using rule 34 (termino -> factor .)
+
+
+state 32
+
+    (37) factor -> ENTERO .
+
+    POR             reduce using rule 37 (factor -> ENTERO .)
+    ENTRE           reduce using rule 37 (factor -> ENTERO .)
+    IGUAL           reduce using rule 37 (factor -> ENTERO .)
+    DISTINTO        reduce using rule 37 (factor -> ENTERO .)
+    MENOR           reduce using rule 37 (factor -> ENTERO .)
+    MAYOR           reduce using rule 37 (factor -> ENTERO .)
+    MENOR_IGUAL     reduce using rule 37 (factor -> ENTERO .)
+    MAYOR_IGUAL     reduce using rule 37 (factor -> ENTERO .)
+    MAS             reduce using rule 37 (factor -> ENTERO .)
+    MENOS           reduce using rule 37 (factor -> ENTERO .)
+    Y               reduce using rule 37 (factor -> ENTERO .)
+    O               reduce using rule 37 (factor -> ENTERO .)
+    ENTONCES        reduce using rule 37 (factor -> ENTERO .)
+    EJECUTAR        reduce using rule 37 (factor -> ENTERO .)
+    VECES           reduce using rule 37 (factor -> ENTERO .)
+    NUEVA_LINEA     reduce using rule 37 (factor -> ENTERO .)
+    PAREN_DER       reduce using rule 37 (factor -> ENTERO .)
+
+
+state 33
+
+    (38) factor -> FLOTANTE .
+
+    POR             reduce using rule 38 (factor -> FLOTANTE .)
+    ENTRE           reduce using rule 38 (factor -> FLOTANTE .)
+    IGUAL           reduce using rule 38 (factor -> FLOTANTE .)
+    DISTINTO        reduce using rule 38 (factor -> FLOTANTE .)
+    MENOR           reduce using rule 38 (factor -> FLOTANTE .)
+    MAYOR           reduce using rule 38 (factor -> FLOTANTE .)
+    MENOR_IGUAL     reduce using rule 38 (factor -> FLOTANTE .)
+    MAYOR_IGUAL     reduce using rule 38 (factor -> FLOTANTE .)
+    MAS             reduce using rule 38 (factor -> FLOTANTE .)
+    MENOS           reduce using rule 38 (factor -> FLOTANTE .)
+    Y               reduce using rule 38 (factor -> FLOTANTE .)
+    O               reduce using rule 38 (factor -> FLOTANTE .)
+    ENTONCES        reduce using rule 38 (factor -> FLOTANTE .)
+    EJECUTAR        reduce using rule 38 (factor -> FLOTANTE .)
+    VECES           reduce using rule 38 (factor -> FLOTANTE .)
+    NUEVA_LINEA     reduce using rule 38 (factor -> FLOTANTE .)
+    PAREN_DER       reduce using rule 38 (factor -> FLOTANTE .)
+
+
+state 34
+
+    (39) factor -> VERDADERO .
+
+    POR             reduce using rule 39 (factor -> VERDADERO .)
+    ENTRE           reduce using rule 39 (factor -> VERDADERO .)
+    IGUAL           reduce using rule 39 (factor -> VERDADERO .)
+    DISTINTO        reduce using rule 39 (factor -> VERDADERO .)
+    MENOR           reduce using rule 39 (factor -> VERDADERO .)
+    MAYOR           reduce using rule 39 (factor -> VERDADERO .)
+    MENOR_IGUAL     reduce using rule 39 (factor -> VERDADERO .)
+    MAYOR_IGUAL     reduce using rule 39 (factor -> VERDADERO .)
+    MAS             reduce using rule 39 (factor -> VERDADERO .)
+    MENOS           reduce using rule 39 (factor -> VERDADERO .)
+    Y               reduce using rule 39 (factor -> VERDADERO .)
+    O               reduce using rule 39 (factor -> VERDADERO .)
+    ENTONCES        reduce using rule 39 (factor -> VERDADERO .)
+    EJECUTAR        reduce using rule 39 (factor -> VERDADERO .)
+    VECES           reduce using rule 39 (factor -> VERDADERO .)
+    NUEVA_LINEA     reduce using rule 39 (factor -> VERDADERO .)
+    PAREN_DER       reduce using rule 39 (factor -> VERDADERO .)
+
+
+state 35
+
+    (40) factor -> FALSO .
+
+    POR             reduce using rule 40 (factor -> FALSO .)
+    ENTRE           reduce using rule 40 (factor -> FALSO .)
+    IGUAL           reduce using rule 40 (factor -> FALSO .)
+    DISTINTO        reduce using rule 40 (factor -> FALSO .)
+    MENOR           reduce using rule 40 (factor -> FALSO .)
+    MAYOR           reduce using rule 40 (factor -> FALSO .)
+    MENOR_IGUAL     reduce using rule 40 (factor -> FALSO .)
+    MAYOR_IGUAL     reduce using rule 40 (factor -> FALSO .)
+    MAS             reduce using rule 40 (factor -> FALSO .)
+    MENOS           reduce using rule 40 (factor -> FALSO .)
+    Y               reduce using rule 40 (factor -> FALSO .)
+    O               reduce using rule 40 (factor -> FALSO .)
+    ENTONCES        reduce using rule 40 (factor -> FALSO .)
+    EJECUTAR        reduce using rule 40 (factor -> FALSO .)
+    VECES           reduce using rule 40 (factor -> FALSO .)
+    NUEVA_LINEA     reduce using rule 40 (factor -> FALSO .)
+    PAREN_DER       reduce using rule 40 (factor -> FALSO .)
+
+
+state 36
+
+    (41) factor -> ID .
+
+    POR             reduce using rule 41 (factor -> ID .)
+    ENTRE           reduce using rule 41 (factor -> ID .)
+    IGUAL           reduce using rule 41 (factor -> ID .)
+    DISTINTO        reduce using rule 41 (factor -> ID .)
+    MENOR           reduce using rule 41 (factor -> ID .)
+    MAYOR           reduce using rule 41 (factor -> ID .)
+    MENOR_IGUAL     reduce using rule 41 (factor -> ID .)
+    MAYOR_IGUAL     reduce using rule 41 (factor -> ID .)
+    MAS             reduce using rule 41 (factor -> ID .)
+    MENOS           reduce using rule 41 (factor -> ID .)
+    Y               reduce using rule 41 (factor -> ID .)
+    O               reduce using rule 41 (factor -> ID .)
+    ENTONCES        reduce using rule 41 (factor -> ID .)
+    EJECUTAR        reduce using rule 41 (factor -> ID .)
+    VECES           reduce using rule 41 (factor -> ID .)
+    NUEVA_LINEA     reduce using rule 41 (factor -> ID .)
+    PAREN_DER       reduce using rule 41 (factor -> ID .)
+
+
+state 37
+
+    (42) factor -> LEER_TEMP . PAREN_IZQ ID PAREN_DER
+
+    PAREN_IZQ       shift and go to state 62
+
+
+state 38
+
+    (46) factor -> PAREN_IZQ . expresion PAREN_DER
+    (20) expresion -> . expresion_logica
+    (21) expresion_logica -> . expresion_relacional
+    (22) expresion_logica -> . expresion_logica Y expresion_relacional
+    (23) expresion_logica -> . expresion_logica O expresion_relacional
+    (24) expresion_relacional -> . expresion_aritmetica
+    (25) expresion_relacional -> . expresion_aritmetica IGUAL expresion_aritmetica
+    (26) expresion_relacional -> . expresion_aritmetica DISTINTO expresion_aritmetica
+    (27) expresion_relacional -> . expresion_aritmetica MENOR expresion_aritmetica
+    (28) expresion_relacional -> . expresion_aritmetica MAYOR expresion_aritmetica
+    (29) expresion_relacional -> . expresion_aritmetica MENOR_IGUAL expresion_aritmetica
+    (30) expresion_relacional -> . expresion_aritmetica MAYOR_IGUAL expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion                      shift and go to state 63
+    expresion_logica               shift and go to state 27
+    expresion_relacional           shift and go to state 28
+    expresion_aritmetica           shift and go to state 29
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 39
+
+    (43) factor -> ESTADO_CARGA . PAREN_IZQ ID PAREN_DER
+
+    PAREN_IZQ       shift and go to state 64
+
+
+state 40
+
+    (44) factor -> LEER_GEN . PAREN_IZQ ID PAREN_DER
+
+    PAREN_IZQ       shift and go to state 65
+
+
+state 41
+
+    (45) factor -> LEER_DEM . PAREN_IZQ ID PAREN_DER
+
+    PAREN_IZQ       shift and go to state 66
+
+
+state 42
+
+    (47) factor -> NO . factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    factor                         shift and go to state 67
+
+state 43
+
+    (18) declaracion_mientras -> MIENTRAS expresion . EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+
+    EJECUTAR        shift and go to state 68
+
+
+state 44
+
+    (19) declaracion_repetir -> REPETIR expresion . VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+
+    VECES           shift and go to state 69
+
+
+state 45
+
+    (11) comando -> CONMUTAR PAREN_IZQ ID . COMA expresion PAREN_DER
+
+    COMA            shift and go to state 70
+
+
+state 46
+
+    (15) asignacion -> ID ASIGNACION expresion .
+
+    NUEVA_LINEA     reduce using rule 15 (asignacion -> ID ASIGNACION expresion .)
+
+
+state 47
+
+    (12) comando -> REFRIGERACION PAREN_IZQ ID . COMA expresion PAREN_DER
+
+    COMA            shift and go to state 71
+
+
+state 48
+
+    (14) comando -> ESPERAR PAREN_IZQ expresion . PAREN_DER
+
+    PAREN_DER       shift and go to state 72
+
+
+state 49
+
+    (16) declaracion_si -> SI expresion ENTONCES . NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> SI expresion ENTONCES . NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+
+    NUEVA_LINEA     shift and go to state 73
+
+
+state 50
+
+    (22) expresion_logica -> expresion_logica Y . expresion_relacional
+    (24) expresion_relacional -> . expresion_aritmetica
+    (25) expresion_relacional -> . expresion_aritmetica IGUAL expresion_aritmetica
+    (26) expresion_relacional -> . expresion_aritmetica DISTINTO expresion_aritmetica
+    (27) expresion_relacional -> . expresion_aritmetica MENOR expresion_aritmetica
+    (28) expresion_relacional -> . expresion_aritmetica MAYOR expresion_aritmetica
+    (29) expresion_relacional -> . expresion_aritmetica MENOR_IGUAL expresion_aritmetica
+    (30) expresion_relacional -> . expresion_aritmetica MAYOR_IGUAL expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion_relacional           shift and go to state 74
+    expresion_aritmetica           shift and go to state 29
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 51
+
+    (23) expresion_logica -> expresion_logica O . expresion_relacional
+    (24) expresion_relacional -> . expresion_aritmetica
+    (25) expresion_relacional -> . expresion_aritmetica IGUAL expresion_aritmetica
+    (26) expresion_relacional -> . expresion_aritmetica DISTINTO expresion_aritmetica
+    (27) expresion_relacional -> . expresion_aritmetica MENOR expresion_aritmetica
+    (28) expresion_relacional -> . expresion_aritmetica MAYOR expresion_aritmetica
+    (29) expresion_relacional -> . expresion_aritmetica MENOR_IGUAL expresion_aritmetica
+    (30) expresion_relacional -> . expresion_aritmetica MAYOR_IGUAL expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion_relacional           shift and go to state 75
+    expresion_aritmetica           shift and go to state 29
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 52
+
+    (25) expresion_relacional -> expresion_aritmetica IGUAL . expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion_aritmetica           shift and go to state 76
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 53
+
+    (26) expresion_relacional -> expresion_aritmetica DISTINTO . expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion_aritmetica           shift and go to state 77
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 54
+
+    (27) expresion_relacional -> expresion_aritmetica MENOR . expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion_aritmetica           shift and go to state 78
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 55
+
+    (28) expresion_relacional -> expresion_aritmetica MAYOR . expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion_aritmetica           shift and go to state 79
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 56
+
+    (29) expresion_relacional -> expresion_aritmetica MENOR_IGUAL . expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion_aritmetica           shift and go to state 80
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 57
+
+    (30) expresion_relacional -> expresion_aritmetica MAYOR_IGUAL . expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion_aritmetica           shift and go to state 81
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 58
+
+    (32) expresion_aritmetica -> expresion_aritmetica MAS . termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    termino                        shift and go to state 82
+    factor                         shift and go to state 31
+
+state 59
+
+    (33) expresion_aritmetica -> expresion_aritmetica MENOS . termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    termino                        shift and go to state 83
+    factor                         shift and go to state 31
+
+state 60
+
+    (35) termino -> termino POR . factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    factor                         shift and go to state 84
+
+state 61
+
+    (36) termino -> termino ENTRE . factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    factor                         shift and go to state 85
+
+state 62
+
+    (42) factor -> LEER_TEMP PAREN_IZQ . ID PAREN_DER
+
+    ID              shift and go to state 86
+
+
+state 63
+
+    (46) factor -> PAREN_IZQ expresion . PAREN_DER
+
+    PAREN_DER       shift and go to state 87
+
+
+state 64
+
+    (43) factor -> ESTADO_CARGA PAREN_IZQ . ID PAREN_DER
+
+    ID              shift and go to state 88
+
+
+state 65
+
+    (44) factor -> LEER_GEN PAREN_IZQ . ID PAREN_DER
+
+    ID              shift and go to state 89
+
+
+state 66
+
+    (45) factor -> LEER_DEM PAREN_IZQ . ID PAREN_DER
+
+    ID              shift and go to state 90
+
+
+state 67
+
+    (47) factor -> NO factor .
+
+    POR             reduce using rule 47 (factor -> NO factor .)
+    ENTRE           reduce using rule 47 (factor -> NO factor .)
+    IGUAL           reduce using rule 47 (factor -> NO factor .)
+    DISTINTO        reduce using rule 47 (factor -> NO factor .)
+    MENOR           reduce using rule 47 (factor -> NO factor .)
+    MAYOR           reduce using rule 47 (factor -> NO factor .)
+    MENOR_IGUAL     reduce using rule 47 (factor -> NO factor .)
+    MAYOR_IGUAL     reduce using rule 47 (factor -> NO factor .)
+    MAS             reduce using rule 47 (factor -> NO factor .)
+    MENOS           reduce using rule 47 (factor -> NO factor .)
+    Y               reduce using rule 47 (factor -> NO factor .)
+    O               reduce using rule 47 (factor -> NO factor .)
+    ENTONCES        reduce using rule 47 (factor -> NO factor .)
+    EJECUTAR        reduce using rule 47 (factor -> NO factor .)
+    VECES           reduce using rule 47 (factor -> NO factor .)
+    NUEVA_LINEA     reduce using rule 47 (factor -> NO factor .)
+    PAREN_DER       reduce using rule 47 (factor -> NO factor .)
+
+
+state 68
+
+    (18) declaracion_mientras -> MIENTRAS expresion EJECUTAR . NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+
+    NUEVA_LINEA     shift and go to state 91
+
+
+state 69
+
+    (19) declaracion_repetir -> REPETIR expresion VECES . NUEVA_LINEA lista_sentencias FIN_REPETIR
+
+    NUEVA_LINEA     shift and go to state 92
+
+
+state 70
+
+    (11) comando -> CONMUTAR PAREN_IZQ ID COMA . expresion PAREN_DER
+    (20) expresion -> . expresion_logica
+    (21) expresion_logica -> . expresion_relacional
+    (22) expresion_logica -> . expresion_logica Y expresion_relacional
+    (23) expresion_logica -> . expresion_logica O expresion_relacional
+    (24) expresion_relacional -> . expresion_aritmetica
+    (25) expresion_relacional -> . expresion_aritmetica IGUAL expresion_aritmetica
+    (26) expresion_relacional -> . expresion_aritmetica DISTINTO expresion_aritmetica
+    (27) expresion_relacional -> . expresion_aritmetica MENOR expresion_aritmetica
+    (28) expresion_relacional -> . expresion_aritmetica MAYOR expresion_aritmetica
+    (29) expresion_relacional -> . expresion_aritmetica MENOR_IGUAL expresion_aritmetica
+    (30) expresion_relacional -> . expresion_aritmetica MAYOR_IGUAL expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion                      shift and go to state 93
+    expresion_logica               shift and go to state 27
+    expresion_relacional           shift and go to state 28
+    expresion_aritmetica           shift and go to state 29
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 71
+
+    (12) comando -> REFRIGERACION PAREN_IZQ ID COMA . expresion PAREN_DER
+    (20) expresion -> . expresion_logica
+    (21) expresion_logica -> . expresion_relacional
+    (22) expresion_logica -> . expresion_logica Y expresion_relacional
+    (23) expresion_logica -> . expresion_logica O expresion_relacional
+    (24) expresion_relacional -> . expresion_aritmetica
+    (25) expresion_relacional -> . expresion_aritmetica IGUAL expresion_aritmetica
+    (26) expresion_relacional -> . expresion_aritmetica DISTINTO expresion_aritmetica
+    (27) expresion_relacional -> . expresion_aritmetica MENOR expresion_aritmetica
+    (28) expresion_relacional -> . expresion_aritmetica MAYOR expresion_aritmetica
+    (29) expresion_relacional -> . expresion_aritmetica MENOR_IGUAL expresion_aritmetica
+    (30) expresion_relacional -> . expresion_aritmetica MAYOR_IGUAL expresion_aritmetica
+    (31) expresion_aritmetica -> . termino
+    (32) expresion_aritmetica -> . expresion_aritmetica MAS termino
+    (33) expresion_aritmetica -> . expresion_aritmetica MENOS termino
+    (34) termino -> . factor
+    (35) termino -> . termino POR factor
+    (36) termino -> . termino ENTRE factor
+    (37) factor -> . ENTERO
+    (38) factor -> . FLOTANTE
+    (39) factor -> . VERDADERO
+    (40) factor -> . FALSO
+    (41) factor -> . ID
+    (42) factor -> . LEER_TEMP PAREN_IZQ ID PAREN_DER
+    (43) factor -> . ESTADO_CARGA PAREN_IZQ ID PAREN_DER
+    (44) factor -> . LEER_GEN PAREN_IZQ ID PAREN_DER
+    (45) factor -> . LEER_DEM PAREN_IZQ ID PAREN_DER
+    (46) factor -> . PAREN_IZQ expresion PAREN_DER
+    (47) factor -> . NO factor
+
+    ENTERO          shift and go to state 32
+    FLOTANTE        shift and go to state 33
+    VERDADERO       shift and go to state 34
+    FALSO           shift and go to state 35
+    ID              shift and go to state 36
+    LEER_TEMP       shift and go to state 37
+    ESTADO_CARGA    shift and go to state 39
+    LEER_GEN        shift and go to state 40
+    LEER_DEM        shift and go to state 41
+    PAREN_IZQ       shift and go to state 38
+    NO              shift and go to state 42
+
+    expresion                      shift and go to state 94
+    expresion_logica               shift and go to state 27
+    expresion_relacional           shift and go to state 28
+    expresion_aritmetica           shift and go to state 29
+    termino                        shift and go to state 30
+    factor                         shift and go to state 31
+
+state 72
+
+    (14) comando -> ESPERAR PAREN_IZQ expresion PAREN_DER .
+
+    NUEVA_LINEA     reduce using rule 14 (comando -> ESPERAR PAREN_IZQ expresion PAREN_DER .)
+
+
+state 73
+
+    (16) declaracion_si -> SI expresion ENTONCES NUEVA_LINEA . lista_sentencias FIN_SI
+    (17) declaracion_si -> SI expresion ENTONCES NUEVA_LINEA . lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (2) lista_sentencias -> . sentencia
+    (3) lista_sentencias -> . lista_sentencias sentencia
+    (4) sentencia -> . comando NUEVA_LINEA
+    (5) sentencia -> . asignacion NUEVA_LINEA
+    (6) sentencia -> . declaracion_si
+    (7) sentencia -> . declaracion_mientras
+    (8) sentencia -> . declaracion_repetir
+    (9) sentencia -> . NUEVA_LINEA
+    (10) comando -> . INIT_GRID
+    (11) comando -> . CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER
+    (12) comando -> . REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER
+    (13) comando -> . ALERTA
+    (14) comando -> . ESPERAR PAREN_IZQ expresion PAREN_DER
+    (15) asignacion -> . ID ASIGNACION expresion
+    (16) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (18) declaracion_mientras -> . MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+    (19) declaracion_repetir -> . REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+
+    NUEVA_LINEA     shift and go to state 5
+    INIT_GRID       shift and go to state 10
+    CONMUTAR        shift and go to state 11
+    REFRIGERACION   shift and go to state 13
+    ALERTA          shift and go to state 14
+    ESPERAR         shift and go to state 15
+    ID              shift and go to state 12
+    SI              shift and go to state 16
+    MIENTRAS        shift and go to state 17
+    REPETIR         shift and go to state 18
+
+    lista_sentencias               shift and go to state 95
+    sentencia                      shift and go to state 3
+    comando                        shift and go to state 4
+    asignacion                     shift and go to state 6
+    declaracion_si                 shift and go to state 7
+    declaracion_mientras           shift and go to state 8
+    declaracion_repetir            shift and go to state 9
+
+state 74
+
+    (22) expresion_logica -> expresion_logica Y expresion_relacional .
+
+    Y               reduce using rule 22 (expresion_logica -> expresion_logica Y expresion_relacional .)
+    O               reduce using rule 22 (expresion_logica -> expresion_logica Y expresion_relacional .)
+    ENTONCES        reduce using rule 22 (expresion_logica -> expresion_logica Y expresion_relacional .)
+    EJECUTAR        reduce using rule 22 (expresion_logica -> expresion_logica Y expresion_relacional .)
+    VECES           reduce using rule 22 (expresion_logica -> expresion_logica Y expresion_relacional .)
+    NUEVA_LINEA     reduce using rule 22 (expresion_logica -> expresion_logica Y expresion_relacional .)
+    PAREN_DER       reduce using rule 22 (expresion_logica -> expresion_logica Y expresion_relacional .)
+
+
+state 75
+
+    (23) expresion_logica -> expresion_logica O expresion_relacional .
+
+    Y               reduce using rule 23 (expresion_logica -> expresion_logica O expresion_relacional .)
+    O               reduce using rule 23 (expresion_logica -> expresion_logica O expresion_relacional .)
+    ENTONCES        reduce using rule 23 (expresion_logica -> expresion_logica O expresion_relacional .)
+    EJECUTAR        reduce using rule 23 (expresion_logica -> expresion_logica O expresion_relacional .)
+    VECES           reduce using rule 23 (expresion_logica -> expresion_logica O expresion_relacional .)
+    NUEVA_LINEA     reduce using rule 23 (expresion_logica -> expresion_logica O expresion_relacional .)
+    PAREN_DER       reduce using rule 23 (expresion_logica -> expresion_logica O expresion_relacional .)
+
+
+state 76
+
+    (25) expresion_relacional -> expresion_aritmetica IGUAL expresion_aritmetica .
+    (32) expresion_aritmetica -> expresion_aritmetica . MAS termino
+    (33) expresion_aritmetica -> expresion_aritmetica . MENOS termino
+
+    Y               reduce using rule 25 (expresion_relacional -> expresion_aritmetica IGUAL expresion_aritmetica .)
+    O               reduce using rule 25 (expresion_relacional -> expresion_aritmetica IGUAL expresion_aritmetica .)
+    ENTONCES        reduce using rule 25 (expresion_relacional -> expresion_aritmetica IGUAL expresion_aritmetica .)
+    EJECUTAR        reduce using rule 25 (expresion_relacional -> expresion_aritmetica IGUAL expresion_aritmetica .)
+    VECES           reduce using rule 25 (expresion_relacional -> expresion_aritmetica IGUAL expresion_aritmetica .)
+    NUEVA_LINEA     reduce using rule 25 (expresion_relacional -> expresion_aritmetica IGUAL expresion_aritmetica .)
+    PAREN_DER       reduce using rule 25 (expresion_relacional -> expresion_aritmetica IGUAL expresion_aritmetica .)
+    MAS             shift and go to state 58
+    MENOS           shift and go to state 59
+
+
+state 77
+
+    (26) expresion_relacional -> expresion_aritmetica DISTINTO expresion_aritmetica .
+    (32) expresion_aritmetica -> expresion_aritmetica . MAS termino
+    (33) expresion_aritmetica -> expresion_aritmetica . MENOS termino
+
+    Y               reduce using rule 26 (expresion_relacional -> expresion_aritmetica DISTINTO expresion_aritmetica .)
+    O               reduce using rule 26 (expresion_relacional -> expresion_aritmetica DISTINTO expresion_aritmetica .)
+    ENTONCES        reduce using rule 26 (expresion_relacional -> expresion_aritmetica DISTINTO expresion_aritmetica .)
+    EJECUTAR        reduce using rule 26 (expresion_relacional -> expresion_aritmetica DISTINTO expresion_aritmetica .)
+    VECES           reduce using rule 26 (expresion_relacional -> expresion_aritmetica DISTINTO expresion_aritmetica .)
+    NUEVA_LINEA     reduce using rule 26 (expresion_relacional -> expresion_aritmetica DISTINTO expresion_aritmetica .)
+    PAREN_DER       reduce using rule 26 (expresion_relacional -> expresion_aritmetica DISTINTO expresion_aritmetica .)
+    MAS             shift and go to state 58
+    MENOS           shift and go to state 59
+
+
+state 78
+
+    (27) expresion_relacional -> expresion_aritmetica MENOR expresion_aritmetica .
+    (32) expresion_aritmetica -> expresion_aritmetica . MAS termino
+    (33) expresion_aritmetica -> expresion_aritmetica . MENOS termino
+
+    Y               reduce using rule 27 (expresion_relacional -> expresion_aritmetica MENOR expresion_aritmetica .)
+    O               reduce using rule 27 (expresion_relacional -> expresion_aritmetica MENOR expresion_aritmetica .)
+    ENTONCES        reduce using rule 27 (expresion_relacional -> expresion_aritmetica MENOR expresion_aritmetica .)
+    EJECUTAR        reduce using rule 27 (expresion_relacional -> expresion_aritmetica MENOR expresion_aritmetica .)
+    VECES           reduce using rule 27 (expresion_relacional -> expresion_aritmetica MENOR expresion_aritmetica .)
+    NUEVA_LINEA     reduce using rule 27 (expresion_relacional -> expresion_aritmetica MENOR expresion_aritmetica .)
+    PAREN_DER       reduce using rule 27 (expresion_relacional -> expresion_aritmetica MENOR expresion_aritmetica .)
+    MAS             shift and go to state 58
+    MENOS           shift and go to state 59
+
+
+state 79
+
+    (28) expresion_relacional -> expresion_aritmetica MAYOR expresion_aritmetica .
+    (32) expresion_aritmetica -> expresion_aritmetica . MAS termino
+    (33) expresion_aritmetica -> expresion_aritmetica . MENOS termino
+
+    Y               reduce using rule 28 (expresion_relacional -> expresion_aritmetica MAYOR expresion_aritmetica .)
+    O               reduce using rule 28 (expresion_relacional -> expresion_aritmetica MAYOR expresion_aritmetica .)
+    ENTONCES        reduce using rule 28 (expresion_relacional -> expresion_aritmetica MAYOR expresion_aritmetica .)
+    EJECUTAR        reduce using rule 28 (expresion_relacional -> expresion_aritmetica MAYOR expresion_aritmetica .)
+    VECES           reduce using rule 28 (expresion_relacional -> expresion_aritmetica MAYOR expresion_aritmetica .)
+    NUEVA_LINEA     reduce using rule 28 (expresion_relacional -> expresion_aritmetica MAYOR expresion_aritmetica .)
+    PAREN_DER       reduce using rule 28 (expresion_relacional -> expresion_aritmetica MAYOR expresion_aritmetica .)
+    MAS             shift and go to state 58
+    MENOS           shift and go to state 59
+
+
+state 80
+
+    (29) expresion_relacional -> expresion_aritmetica MENOR_IGUAL expresion_aritmetica .
+    (32) expresion_aritmetica -> expresion_aritmetica . MAS termino
+    (33) expresion_aritmetica -> expresion_aritmetica . MENOS termino
+
+    Y               reduce using rule 29 (expresion_relacional -> expresion_aritmetica MENOR_IGUAL expresion_aritmetica .)
+    O               reduce using rule 29 (expresion_relacional -> expresion_aritmetica MENOR_IGUAL expresion_aritmetica .)
+    ENTONCES        reduce using rule 29 (expresion_relacional -> expresion_aritmetica MENOR_IGUAL expresion_aritmetica .)
+    EJECUTAR        reduce using rule 29 (expresion_relacional -> expresion_aritmetica MENOR_IGUAL expresion_aritmetica .)
+    VECES           reduce using rule 29 (expresion_relacional -> expresion_aritmetica MENOR_IGUAL expresion_aritmetica .)
+    NUEVA_LINEA     reduce using rule 29 (expresion_relacional -> expresion_aritmetica MENOR_IGUAL expresion_aritmetica .)
+    PAREN_DER       reduce using rule 29 (expresion_relacional -> expresion_aritmetica MENOR_IGUAL expresion_aritmetica .)
+    MAS             shift and go to state 58
+    MENOS           shift and go to state 59
+
+
+state 81
+
+    (30) expresion_relacional -> expresion_aritmetica MAYOR_IGUAL expresion_aritmetica .
+    (32) expresion_aritmetica -> expresion_aritmetica . MAS termino
+    (33) expresion_aritmetica -> expresion_aritmetica . MENOS termino
+
+    Y               reduce using rule 30 (expresion_relacional -> expresion_aritmetica MAYOR_IGUAL expresion_aritmetica .)
+    O               reduce using rule 30 (expresion_relacional -> expresion_aritmetica MAYOR_IGUAL expresion_aritmetica .)
+    ENTONCES        reduce using rule 30 (expresion_relacional -> expresion_aritmetica MAYOR_IGUAL expresion_aritmetica .)
+    EJECUTAR        reduce using rule 30 (expresion_relacional -> expresion_aritmetica MAYOR_IGUAL expresion_aritmetica .)
+    VECES           reduce using rule 30 (expresion_relacional -> expresion_aritmetica MAYOR_IGUAL expresion_aritmetica .)
+    NUEVA_LINEA     reduce using rule 30 (expresion_relacional -> expresion_aritmetica MAYOR_IGUAL expresion_aritmetica .)
+    PAREN_DER       reduce using rule 30 (expresion_relacional -> expresion_aritmetica MAYOR_IGUAL expresion_aritmetica .)
+    MAS             shift and go to state 58
+    MENOS           shift and go to state 59
+
+
+state 82
+
+    (32) expresion_aritmetica -> expresion_aritmetica MAS termino .
+    (35) termino -> termino . POR factor
+    (36) termino -> termino . ENTRE factor
+
+    IGUAL           reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    DISTINTO        reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    MENOR           reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    MAYOR           reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    MENOR_IGUAL     reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    MAYOR_IGUAL     reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    MAS             reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    MENOS           reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    Y               reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    O               reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    ENTONCES        reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    EJECUTAR        reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    VECES           reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    NUEVA_LINEA     reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    PAREN_DER       reduce using rule 32 (expresion_aritmetica -> expresion_aritmetica MAS termino .)
+    POR             shift and go to state 60
+    ENTRE           shift and go to state 61
+
+
+state 83
+
+    (33) expresion_aritmetica -> expresion_aritmetica MENOS termino .
+    (35) termino -> termino . POR factor
+    (36) termino -> termino . ENTRE factor
+
+    IGUAL           reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    DISTINTO        reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    MENOR           reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    MAYOR           reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    MENOR_IGUAL     reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    MAYOR_IGUAL     reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    MAS             reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    MENOS           reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    Y               reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    O               reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    ENTONCES        reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    EJECUTAR        reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    VECES           reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    NUEVA_LINEA     reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    PAREN_DER       reduce using rule 33 (expresion_aritmetica -> expresion_aritmetica MENOS termino .)
+    POR             shift and go to state 60
+    ENTRE           shift and go to state 61
+
+
+state 84
+
+    (35) termino -> termino POR factor .
+
+    POR             reduce using rule 35 (termino -> termino POR factor .)
+    ENTRE           reduce using rule 35 (termino -> termino POR factor .)
+    IGUAL           reduce using rule 35 (termino -> termino POR factor .)
+    DISTINTO        reduce using rule 35 (termino -> termino POR factor .)
+    MENOR           reduce using rule 35 (termino -> termino POR factor .)
+    MAYOR           reduce using rule 35 (termino -> termino POR factor .)
+    MENOR_IGUAL     reduce using rule 35 (termino -> termino POR factor .)
+    MAYOR_IGUAL     reduce using rule 35 (termino -> termino POR factor .)
+    MAS             reduce using rule 35 (termino -> termino POR factor .)
+    MENOS           reduce using rule 35 (termino -> termino POR factor .)
+    Y               reduce using rule 35 (termino -> termino POR factor .)
+    O               reduce using rule 35 (termino -> termino POR factor .)
+    ENTONCES        reduce using rule 35 (termino -> termino POR factor .)
+    EJECUTAR        reduce using rule 35 (termino -> termino POR factor .)
+    VECES           reduce using rule 35 (termino -> termino POR factor .)
+    NUEVA_LINEA     reduce using rule 35 (termino -> termino POR factor .)
+    PAREN_DER       reduce using rule 35 (termino -> termino POR factor .)
+
+
+state 85
+
+    (36) termino -> termino ENTRE factor .
+
+    POR             reduce using rule 36 (termino -> termino ENTRE factor .)
+    ENTRE           reduce using rule 36 (termino -> termino ENTRE factor .)
+    IGUAL           reduce using rule 36 (termino -> termino ENTRE factor .)
+    DISTINTO        reduce using rule 36 (termino -> termino ENTRE factor .)
+    MENOR           reduce using rule 36 (termino -> termino ENTRE factor .)
+    MAYOR           reduce using rule 36 (termino -> termino ENTRE factor .)
+    MENOR_IGUAL     reduce using rule 36 (termino -> termino ENTRE factor .)
+    MAYOR_IGUAL     reduce using rule 36 (termino -> termino ENTRE factor .)
+    MAS             reduce using rule 36 (termino -> termino ENTRE factor .)
+    MENOS           reduce using rule 36 (termino -> termino ENTRE factor .)
+    Y               reduce using rule 36 (termino -> termino ENTRE factor .)
+    O               reduce using rule 36 (termino -> termino ENTRE factor .)
+    ENTONCES        reduce using rule 36 (termino -> termino ENTRE factor .)
+    EJECUTAR        reduce using rule 36 (termino -> termino ENTRE factor .)
+    VECES           reduce using rule 36 (termino -> termino ENTRE factor .)
+    NUEVA_LINEA     reduce using rule 36 (termino -> termino ENTRE factor .)
+    PAREN_DER       reduce using rule 36 (termino -> termino ENTRE factor .)
+
+
+state 86
+
+    (42) factor -> LEER_TEMP PAREN_IZQ ID . PAREN_DER
+
+    PAREN_DER       shift and go to state 96
+
+
+state 87
+
+    (46) factor -> PAREN_IZQ expresion PAREN_DER .
+
+    POR             reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    ENTRE           reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    IGUAL           reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    DISTINTO        reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    MENOR           reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    MAYOR           reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    MENOR_IGUAL     reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    MAYOR_IGUAL     reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    MAS             reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    MENOS           reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    Y               reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    O               reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    ENTONCES        reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    EJECUTAR        reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    VECES           reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    NUEVA_LINEA     reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+    PAREN_DER       reduce using rule 46 (factor -> PAREN_IZQ expresion PAREN_DER .)
+
+
+state 88
+
+    (43) factor -> ESTADO_CARGA PAREN_IZQ ID . PAREN_DER
+
+    PAREN_DER       shift and go to state 97
+
+
+state 89
+
+    (44) factor -> LEER_GEN PAREN_IZQ ID . PAREN_DER
+
+    PAREN_DER       shift and go to state 98
+
+
+state 90
+
+    (45) factor -> LEER_DEM PAREN_IZQ ID . PAREN_DER
+
+    PAREN_DER       shift and go to state 99
+
+
+state 91
+
+    (18) declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA . lista_sentencias FIN_MIENTRAS
+    (2) lista_sentencias -> . sentencia
+    (3) lista_sentencias -> . lista_sentencias sentencia
+    (4) sentencia -> . comando NUEVA_LINEA
+    (5) sentencia -> . asignacion NUEVA_LINEA
+    (6) sentencia -> . declaracion_si
+    (7) sentencia -> . declaracion_mientras
+    (8) sentencia -> . declaracion_repetir
+    (9) sentencia -> . NUEVA_LINEA
+    (10) comando -> . INIT_GRID
+    (11) comando -> . CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER
+    (12) comando -> . REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER
+    (13) comando -> . ALERTA
+    (14) comando -> . ESPERAR PAREN_IZQ expresion PAREN_DER
+    (15) asignacion -> . ID ASIGNACION expresion
+    (16) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (18) declaracion_mientras -> . MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+    (19) declaracion_repetir -> . REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+
+    NUEVA_LINEA     shift and go to state 5
+    INIT_GRID       shift and go to state 10
+    CONMUTAR        shift and go to state 11
+    REFRIGERACION   shift and go to state 13
+    ALERTA          shift and go to state 14
+    ESPERAR         shift and go to state 15
+    ID              shift and go to state 12
+    SI              shift and go to state 16
+    MIENTRAS        shift and go to state 17
+    REPETIR         shift and go to state 18
+
+    lista_sentencias               shift and go to state 100
+    sentencia                      shift and go to state 3
+    comando                        shift and go to state 4
+    asignacion                     shift and go to state 6
+    declaracion_si                 shift and go to state 7
+    declaracion_mientras           shift and go to state 8
+    declaracion_repetir            shift and go to state 9
+
+state 92
+
+    (19) declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA . lista_sentencias FIN_REPETIR
+    (2) lista_sentencias -> . sentencia
+    (3) lista_sentencias -> . lista_sentencias sentencia
+    (4) sentencia -> . comando NUEVA_LINEA
+    (5) sentencia -> . asignacion NUEVA_LINEA
+    (6) sentencia -> . declaracion_si
+    (7) sentencia -> . declaracion_mientras
+    (8) sentencia -> . declaracion_repetir
+    (9) sentencia -> . NUEVA_LINEA
+    (10) comando -> . INIT_GRID
+    (11) comando -> . CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER
+    (12) comando -> . REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER
+    (13) comando -> . ALERTA
+    (14) comando -> . ESPERAR PAREN_IZQ expresion PAREN_DER
+    (15) asignacion -> . ID ASIGNACION expresion
+    (16) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (18) declaracion_mientras -> . MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+    (19) declaracion_repetir -> . REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+
+    NUEVA_LINEA     shift and go to state 5
+    INIT_GRID       shift and go to state 10
+    CONMUTAR        shift and go to state 11
+    REFRIGERACION   shift and go to state 13
+    ALERTA          shift and go to state 14
+    ESPERAR         shift and go to state 15
+    ID              shift and go to state 12
+    SI              shift and go to state 16
+    MIENTRAS        shift and go to state 17
+    REPETIR         shift and go to state 18
+
+    lista_sentencias               shift and go to state 101
+    sentencia                      shift and go to state 3
+    comando                        shift and go to state 4
+    asignacion                     shift and go to state 6
+    declaracion_si                 shift and go to state 7
+    declaracion_mientras           shift and go to state 8
+    declaracion_repetir            shift and go to state 9
+
+state 93
+
+    (11) comando -> CONMUTAR PAREN_IZQ ID COMA expresion . PAREN_DER
+
+    PAREN_DER       shift and go to state 102
+
+
+state 94
+
+    (12) comando -> REFRIGERACION PAREN_IZQ ID COMA expresion . PAREN_DER
+
+    PAREN_DER       shift and go to state 103
+
+
+state 95
+
+    (16) declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias . FIN_SI
+    (17) declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias . SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (3) lista_sentencias -> lista_sentencias . sentencia
+    (4) sentencia -> . comando NUEVA_LINEA
+    (5) sentencia -> . asignacion NUEVA_LINEA
+    (6) sentencia -> . declaracion_si
+    (7) sentencia -> . declaracion_mientras
+    (8) sentencia -> . declaracion_repetir
+    (9) sentencia -> . NUEVA_LINEA
+    (10) comando -> . INIT_GRID
+    (11) comando -> . CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER
+    (12) comando -> . REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER
+    (13) comando -> . ALERTA
+    (14) comando -> . ESPERAR PAREN_IZQ expresion PAREN_DER
+    (15) asignacion -> . ID ASIGNACION expresion
+    (16) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (18) declaracion_mientras -> . MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+    (19) declaracion_repetir -> . REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+
+    FIN_SI          shift and go to state 104
+    SINO            shift and go to state 105
+    NUEVA_LINEA     shift and go to state 5
+    INIT_GRID       shift and go to state 10
+    CONMUTAR        shift and go to state 11
+    REFRIGERACION   shift and go to state 13
+    ALERTA          shift and go to state 14
+    ESPERAR         shift and go to state 15
+    ID              shift and go to state 12
+    SI              shift and go to state 16
+    MIENTRAS        shift and go to state 17
+    REPETIR         shift and go to state 18
+
+    sentencia                      shift and go to state 19
+    comando                        shift and go to state 4
+    asignacion                     shift and go to state 6
+    declaracion_si                 shift and go to state 7
+    declaracion_mientras           shift and go to state 8
+    declaracion_repetir            shift and go to state 9
+
+state 96
+
+    (42) factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .
+
+    POR             reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    ENTRE           reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    IGUAL           reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    DISTINTO        reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    MENOR           reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    MAYOR           reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    MENOR_IGUAL     reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    MAYOR_IGUAL     reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    MAS             reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    MENOS           reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    Y               reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    O               reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    ENTONCES        reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    EJECUTAR        reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    VECES           reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    NUEVA_LINEA     reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+    PAREN_DER       reduce using rule 42 (factor -> LEER_TEMP PAREN_IZQ ID PAREN_DER .)
+
+
+state 97
+
+    (43) factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .
+
+    POR             reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    ENTRE           reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    IGUAL           reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    DISTINTO        reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    MENOR           reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    MAYOR           reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    MENOR_IGUAL     reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    MAYOR_IGUAL     reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    MAS             reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    MENOS           reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    Y               reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    O               reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    ENTONCES        reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    EJECUTAR        reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    VECES           reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    NUEVA_LINEA     reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+    PAREN_DER       reduce using rule 43 (factor -> ESTADO_CARGA PAREN_IZQ ID PAREN_DER .)
+
+
+state 98
+
+    (44) factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .
+
+    POR             reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    ENTRE           reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    IGUAL           reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    DISTINTO        reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    MENOR           reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    MAYOR           reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    MENOR_IGUAL     reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    MAYOR_IGUAL     reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    MAS             reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    MENOS           reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    Y               reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    O               reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    ENTONCES        reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    EJECUTAR        reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    VECES           reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    NUEVA_LINEA     reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+    PAREN_DER       reduce using rule 44 (factor -> LEER_GEN PAREN_IZQ ID PAREN_DER .)
+
+
+state 99
+
+    (45) factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .
+
+    POR             reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    ENTRE           reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    IGUAL           reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    DISTINTO        reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    MENOR           reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    MAYOR           reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    MENOR_IGUAL     reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    MAYOR_IGUAL     reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    MAS             reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    MENOS           reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    Y               reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    O               reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    ENTONCES        reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    EJECUTAR        reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    VECES           reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    NUEVA_LINEA     reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+    PAREN_DER       reduce using rule 45 (factor -> LEER_DEM PAREN_IZQ ID PAREN_DER .)
+
+
+state 100
+
+    (18) declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias . FIN_MIENTRAS
+    (3) lista_sentencias -> lista_sentencias . sentencia
+    (4) sentencia -> . comando NUEVA_LINEA
+    (5) sentencia -> . asignacion NUEVA_LINEA
+    (6) sentencia -> . declaracion_si
+    (7) sentencia -> . declaracion_mientras
+    (8) sentencia -> . declaracion_repetir
+    (9) sentencia -> . NUEVA_LINEA
+    (10) comando -> . INIT_GRID
+    (11) comando -> . CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER
+    (12) comando -> . REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER
+    (13) comando -> . ALERTA
+    (14) comando -> . ESPERAR PAREN_IZQ expresion PAREN_DER
+    (15) asignacion -> . ID ASIGNACION expresion
+    (16) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (18) declaracion_mientras -> . MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+    (19) declaracion_repetir -> . REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+
+    FIN_MIENTRAS    shift and go to state 106
+    NUEVA_LINEA     shift and go to state 5
+    INIT_GRID       shift and go to state 10
+    CONMUTAR        shift and go to state 11
+    REFRIGERACION   shift and go to state 13
+    ALERTA          shift and go to state 14
+    ESPERAR         shift and go to state 15
+    ID              shift and go to state 12
+    SI              shift and go to state 16
+    MIENTRAS        shift and go to state 17
+    REPETIR         shift and go to state 18
+
+    sentencia                      shift and go to state 19
+    comando                        shift and go to state 4
+    asignacion                     shift and go to state 6
+    declaracion_si                 shift and go to state 7
+    declaracion_mientras           shift and go to state 8
+    declaracion_repetir            shift and go to state 9
+
+state 101
+
+    (19) declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias . FIN_REPETIR
+    (3) lista_sentencias -> lista_sentencias . sentencia
+    (4) sentencia -> . comando NUEVA_LINEA
+    (5) sentencia -> . asignacion NUEVA_LINEA
+    (6) sentencia -> . declaracion_si
+    (7) sentencia -> . declaracion_mientras
+    (8) sentencia -> . declaracion_repetir
+    (9) sentencia -> . NUEVA_LINEA
+    (10) comando -> . INIT_GRID
+    (11) comando -> . CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER
+    (12) comando -> . REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER
+    (13) comando -> . ALERTA
+    (14) comando -> . ESPERAR PAREN_IZQ expresion PAREN_DER
+    (15) asignacion -> . ID ASIGNACION expresion
+    (16) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (18) declaracion_mientras -> . MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+    (19) declaracion_repetir -> . REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+
+    FIN_REPETIR     shift and go to state 107
+    NUEVA_LINEA     shift and go to state 5
+    INIT_GRID       shift and go to state 10
+    CONMUTAR        shift and go to state 11
+    REFRIGERACION   shift and go to state 13
+    ALERTA          shift and go to state 14
+    ESPERAR         shift and go to state 15
+    ID              shift and go to state 12
+    SI              shift and go to state 16
+    MIENTRAS        shift and go to state 17
+    REPETIR         shift and go to state 18
+
+    sentencia                      shift and go to state 19
+    comando                        shift and go to state 4
+    asignacion                     shift and go to state 6
+    declaracion_si                 shift and go to state 7
+    declaracion_mientras           shift and go to state 8
+    declaracion_repetir            shift and go to state 9
+
+state 102
+
+    (11) comando -> CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER .
+
+    NUEVA_LINEA     reduce using rule 11 (comando -> CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER .)
+
+
+state 103
+
+    (12) comando -> REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER .
+
+    NUEVA_LINEA     reduce using rule 12 (comando -> REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER .)
+
+
+state 104
+
+    (16) declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .
+
+    NUEVA_LINEA     reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    INIT_GRID       reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    CONMUTAR        reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    REFRIGERACION   reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    ALERTA          reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    ESPERAR         reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    ID              reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    SI              reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    MIENTRAS        reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    REPETIR         reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    $end            reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    FIN_SI          reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    SINO            reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    FIN_MIENTRAS    reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+    FIN_REPETIR     reduce using rule 16 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI .)
+
+
+state 105
+
+    (17) declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO . NUEVA_LINEA lista_sentencias FIN_SI
+
+    NUEVA_LINEA     shift and go to state 108
+
+
+state 106
+
+    (18) declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .
+
+    NUEVA_LINEA     reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    INIT_GRID       reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    CONMUTAR        reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    REFRIGERACION   reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    ALERTA          reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    ESPERAR         reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    ID              reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    SI              reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    MIENTRAS        reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    REPETIR         reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    $end            reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    FIN_SI          reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    SINO            reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    FIN_MIENTRAS    reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+    FIN_REPETIR     reduce using rule 18 (declaracion_mientras -> MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS .)
+
+
+state 107
+
+    (19) declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .
+
+    NUEVA_LINEA     reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    INIT_GRID       reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    CONMUTAR        reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    REFRIGERACION   reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    ALERTA          reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    ESPERAR         reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    ID              reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    SI              reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    MIENTRAS        reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    REPETIR         reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    $end            reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    FIN_SI          reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    SINO            reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    FIN_MIENTRAS    reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+    FIN_REPETIR     reduce using rule 19 (declaracion_repetir -> REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR .)
+
+
+state 108
+
+    (17) declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA . lista_sentencias FIN_SI
+    (2) lista_sentencias -> . sentencia
+    (3) lista_sentencias -> . lista_sentencias sentencia
+    (4) sentencia -> . comando NUEVA_LINEA
+    (5) sentencia -> . asignacion NUEVA_LINEA
+    (6) sentencia -> . declaracion_si
+    (7) sentencia -> . declaracion_mientras
+    (8) sentencia -> . declaracion_repetir
+    (9) sentencia -> . NUEVA_LINEA
+    (10) comando -> . INIT_GRID
+    (11) comando -> . CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER
+    (12) comando -> . REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER
+    (13) comando -> . ALERTA
+    (14) comando -> . ESPERAR PAREN_IZQ expresion PAREN_DER
+    (15) asignacion -> . ID ASIGNACION expresion
+    (16) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (18) declaracion_mientras -> . MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+    (19) declaracion_repetir -> . REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+
+    NUEVA_LINEA     shift and go to state 5
+    INIT_GRID       shift and go to state 10
+    CONMUTAR        shift and go to state 11
+    REFRIGERACION   shift and go to state 13
+    ALERTA          shift and go to state 14
+    ESPERAR         shift and go to state 15
+    ID              shift and go to state 12
+    SI              shift and go to state 16
+    MIENTRAS        shift and go to state 17
+    REPETIR         shift and go to state 18
+
+    lista_sentencias               shift and go to state 109
+    sentencia                      shift and go to state 3
+    comando                        shift and go to state 4
+    asignacion                     shift and go to state 6
+    declaracion_si                 shift and go to state 7
+    declaracion_mientras           shift and go to state 8
+    declaracion_repetir            shift and go to state 9
+
+state 109
+
+    (17) declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias . FIN_SI
+    (3) lista_sentencias -> lista_sentencias . sentencia
+    (4) sentencia -> . comando NUEVA_LINEA
+    (5) sentencia -> . asignacion NUEVA_LINEA
+    (6) sentencia -> . declaracion_si
+    (7) sentencia -> . declaracion_mientras
+    (8) sentencia -> . declaracion_repetir
+    (9) sentencia -> . NUEVA_LINEA
+    (10) comando -> . INIT_GRID
+    (11) comando -> . CONMUTAR PAREN_IZQ ID COMA expresion PAREN_DER
+    (12) comando -> . REFRIGERACION PAREN_IZQ ID COMA expresion PAREN_DER
+    (13) comando -> . ALERTA
+    (14) comando -> . ESPERAR PAREN_IZQ expresion PAREN_DER
+    (15) asignacion -> . ID ASIGNACION expresion
+    (16) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias FIN_SI
+    (17) declaracion_si -> . SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI
+    (18) declaracion_mientras -> . MIENTRAS expresion EJECUTAR NUEVA_LINEA lista_sentencias FIN_MIENTRAS
+    (19) declaracion_repetir -> . REPETIR expresion VECES NUEVA_LINEA lista_sentencias FIN_REPETIR
+
+    FIN_SI          shift and go to state 110
+    NUEVA_LINEA     shift and go to state 5
+    INIT_GRID       shift and go to state 10
+    CONMUTAR        shift and go to state 11
+    REFRIGERACION   shift and go to state 13
+    ALERTA          shift and go to state 14
+    ESPERAR         shift and go to state 15
+    ID              shift and go to state 12
+    SI              shift and go to state 16
+    MIENTRAS        shift and go to state 17
+    REPETIR         shift and go to state 18
+
+    sentencia                      shift and go to state 19
+    comando                        shift and go to state 4
+    asignacion                     shift and go to state 6
+    declaracion_si                 shift and go to state 7
+    declaracion_mientras           shift and go to state 8
+    declaracion_repetir            shift and go to state 9
+
+state 110
+
+    (17) declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .
+
+    NUEVA_LINEA     reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    INIT_GRID       reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    CONMUTAR        reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    REFRIGERACION   reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    ALERTA          reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    ESPERAR         reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    ID              reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    SI              reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    MIENTRAS        reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    REPETIR         reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    $end            reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    FIN_SI          reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    SINO            reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    FIN_MIENTRAS    reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+    FIN_REPETIR     reduce using rule 17 (declaracion_si -> SI expresion ENTONCES NUEVA_LINEA lista_sentencias SINO NUEVA_LINEA lista_sentencias FIN_SI .)
+

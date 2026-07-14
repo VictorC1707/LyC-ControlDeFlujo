@@ -11,9 +11,6 @@
    1) Muestra la derivacion paso a paso (igual que las tablas del informe).
    2) Interpreta la cadena terminal resultante con un cursor tipo "tortuga"
       y dibuja la figura con matplotlib.
-
- Pensado para grabar pantalla: corre figura por figura, con pausas claras.
-================================================================================
 """
 
 import matplotlib.pyplot as plt
