@@ -386,7 +386,7 @@ if x > 3 prnt(x) else prnt("no")
 ======================================================================
 ```
 ### 9. 🌳 Anexo: Árbol de Sintaxis Abstracta (AST)
-```
+
 El parser genera una estructura orientada a objetos para validar la gramática de UnegScript. Los nodos principales soportados actualmente son:
 
 | Nodo | Componentes Guardados | Ejemplo Estructural |
@@ -394,6 +394,8 @@ El parser genera una estructura orientada a objetos para validar la gramática d
 | `NodoAsignacion` | Identificador, Expresión/Valor | `x = 5` |
 | `NodoIf` | Condición, Cuerpo True, Cuerpo False | `if x > 3 ... else ...` |
 | `NodoLlamada` | Nombre de Función, Argumentos | `print("no")` |
+
+
 
 ### Análisis de corrección por token
 
@@ -405,6 +407,7 @@ La sección **[3]** registra **todas** las correcciones realizadas por el pipeli
 | `prnt` | `print` | 1 (insertar 'i') | 1 - 1/5 = **0.80** | Auto-corrección | `'prnt' -> 'print' (auto-corregido)` |
 | `prt` | `print` | 2 | 1 - 2/5 = **0.60** | Fallback LLM | `'prt' -> 'print'` |
 | `x` | — | — | — | Sin procesar | *(no aparece, es identificador válido)* |
+
 
 ### Métricas de rendimiento
 
