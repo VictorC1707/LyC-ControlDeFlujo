@@ -1,5 +1,5 @@
 """
-main.py — Punto de entrada para la ejecución y prueba del Lexer Híbrido UnegScript.
+main.py — Punto de entrada para la ejecución y prueba del Lexer Híbrido y Parser UnegScript.
 """
 
 from __future__ import annotations
@@ -10,11 +10,12 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 from lexer import UnegHybridLexer
+from parser_uneg import ParserUneg  
 
 
 def run_demo():
     print("=" * 70)
-    print("  DEMO LEXER HÍBRIDO UNEGSCRIPT (REQUERIMIENTO 1)")
+    print("  DEMO SISTEMA HÍBRIDO UNEGSCRIPT (REQUERIMIENTO 5)")
     print("=" * 70)
 
     sample_code = 'pront x = 5\nif x > 3 prnt(x) else prnt("no")'
@@ -27,11 +28,9 @@ def run_demo():
 
     start_time = time.perf_counter()
 
+    # --- FASE 1: LEXER ---
     lexer = UnegHybridLexer(sample_code, confidence_threshold=0.8)
     tokens = lexer.tokenize()
-
-    end_time = time.perf_counter()
-    execution_time_ms = (end_time - start_time) * 1000
 
     print(f"\n[2] Lista de Tokens Producidos ({len(tokens)} tokens):")
     print("-" * 70)
@@ -51,9 +50,23 @@ def run_demo():
     parser_stream = lexer.get_parser_stream()
     print(f"  Stream = {parser_stream}")
 
-    print("\n[5] Mediciones de Rendimiento:")
+    # --- FASE 2: PARSER (TU APORTE) ---
+    print("\n[5] AST ESTRUCTURADO (Salida del Parser):")
+    print("-" * 70)
+    parser = ParserUneg(parser_stream)
+    try:
+        ast = parser.parse_programa()
+        for nodo in ast:
+            print(f"  {nodo}")
+    except SyntaxError as error:
+        print(f"  FALLO DE SINTAXIS: {error}")
+
+    end_time = time.perf_counter()
+    execution_time_ms = (end_time - start_time) * 1000
+
+    print("\n[6] Mediciones de Rendimiento:")
     print("-" * 50)
-    print(f"  • Tiempo total de tokenización léxica híbrida: {execution_time_ms:.4f} ms")
+    print(f"  • Tiempo total de ejecución (Lexer + Parser): {execution_time_ms:.4f} ms")
     print("=" * 70)
 
 
@@ -74,9 +87,6 @@ def process_file(file_path: str):
     lexer = UnegHybridLexer(code, confidence_threshold=0.8)
     tokens = lexer.tokenize()
 
-    end_time = time.perf_counter()
-    execution_time_ms = (end_time - start_time) * 1000
-
     print(f"\nTokens identificados ({len(tokens)}):")
     for tok in tokens:
         print(f"  {tok}")
@@ -85,7 +95,21 @@ def process_file(file_path: str):
     for sug in lexer.ai_suggestions:
         print(f"  • {sug}")
 
-    print(f"\nTiempo de ejecución: {execution_time_ms:.4f} ms")
+    # --- EJECUCIÓN DEL PARSER EN ARCHIVOS EXTERNOS ---
+    print("\nEstructura del Árbol (AST):")
+    parser_stream = lexer.get_parser_stream()
+    parser = ParserUneg(parser_stream)
+    try:
+        ast = parser.parse_programa()
+        for nodo in ast:
+            print(f"  {nodo}")
+    except SyntaxError as error:
+        print(f"  Error de Sintaxis: {error}")
+
+    end_time = time.perf_counter()
+    execution_time_ms = (end_time - start_time) * 1000
+
+    print(f"\nTiempo de ejecución total: {execution_time_ms:.4f} ms")
 
 
 if __name__ == "__main__":

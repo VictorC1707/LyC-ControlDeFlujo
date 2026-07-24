@@ -1,53 +1,63 @@
-# Lexer Híbrido para UnegScript — Documentación Completa
+# 🚀 Sistema Híbrido para UnegScript: Lexer y Parser — Documentación Completa
 
-> **Materia:** Lenguaje y Compiladores · Tema 5: Análisis Sintáctico
-> **Componente:** Analizador Léxico Híbrido (Clásico + IA)
-> **Lenguaje:** Python 3.x (solo librería estándar, sin dependencias externas)
+> 🏛️ **Materia:** Lenguaje y Compiladores · Tema 5: Análisis Sintáctico
+> 👥 **Componentes:** Analizador Léxico Híbrido (Parte A) + Parser Descendente y AST (Parte B)
+> 🐍 **Lenguaje:** Python 3.x (solo librería estándar, sin dependencias externas)
 
 ---
 
-## Tabla de Contenidos
+## 📑 Tabla de Contenidos
 
 1. [¿Qué es esto y para qué sirve?](#1-qué-es-esto-y-para-qué-sirve)
 2. [Estructura del proyecto](#2-estructura-del-proyecto)
 3. [Cómo ejecutarlo](#3-cómo-ejecutarlo)
 4. [Cómo funciona internamente](#4-cómo-funciona-internamente)
-5. [Guía de integración para el Parser](#5-guía-de-integración-para-el-parser)
+5. [Guía de integración de Tokens](#5-guía-de-integración-de-tokens)
 6. [Referencia completa de tokens](#6-referencia-completa-de-tokens)
 7. [Palabras clave reconocidas por UnegScript](#7-palabras-clave-reconocidas-por-unegscript)
-8. [Resultados de pruebas de ejecución](#8-resultados-de-pruebas-de-ejecución)
+8. [Resultados de pruebas de ejecución (Lexer + Parser)](#8-resultados-de-pruebas-de-ejecución-lexer--parser)
+9. [Anexo: Árbol de Sintaxis Abstracta (AST)](#9-anexo-árbol-de-sintaxis-abstracta-ast)
 
 ---
 
-## 1. ¿Qué es esto y para qué sirve?
+## 1. 💡 ¿Qué es esto y para qué sirve?
 
-El **Lexer Híbrido** es la primera fase del compilador para *UnegScript* (subconjunto de Python). Su trabajo es:
+Este sistema representa las dos primeras fases del compilador para *UnegScript* (un subconjunto de Python). Su trabajo conjunto es:
 
-1. **Leer código fuente** en texto plano.
-2. **Identificar y clasificar** cada elemento del código (palabras clave, operadores, números, cadenas, etc.) en *tokens*.
-3. **Corregir errores tipográficos** en tokens de forma automática cuando la similitud con una palabra conocida es alta (≥ 80%).
-4. **Consultar al mecanismo IA (LLM)** cuando el error tipográfico es ambiguo (similitud < 80%) y generar una sugerencia de corrección.
-5. **Entregar la lista de tokens al Parser**, en un formato limpio y sin errores ortográficos, listo para el análisis sintáctico.
+1. 📖 **Leer código fuente** en texto plano.
+2. 🔍 **Identificar y clasificar** cada elemento del código en *tokens*.
+3. 🛠️ **Corregir errores tipográficos** de forma automática (similitud ≥ 80%).
+4. 🤖 **Consultar a la IA (LLM)** cuando el error es ambiguo (similitud < 80%).
+5. 📤 **Entregar la lista de tokens limpia** al Analizador Sintáctico.
+6. 🏗️ **Validar la sintaxis** mediante un Parser Recursivo Descendente con *lookahead*.
+7. 🌳 **Construir el AST (Árbol de Sintaxis Abstracta)** para representar la jerarquía lógica de las instrucciones.
 
 ---
 
-## 2. Estructura del proyecto
-
 ```
-Tema 5/5 Lexer/
-├── src/
-│   ├── tokens.py        # Tipos de token, dataclass Token, reglas regex, KEYWORDS
-│   ├── similarity.py    # Distancia Levenshtein, ratio de confianza, CANDIDATES
-│   ├── llm_fallback.py  # Generador de prompts y simulación del LLM
-│   ├── lexer.py         # Motor principal del Lexer (pipeline híbrido)
-│   └── main.py          # Demo ejecutable y punto de entrada CLI
-├── ejemplos/
-│   └── ejemplo_errores.uneg   # Código de prueba con errores intencionales
-├── test_lexer.py        # Suite de pruebas unitarias (4 pruebas, 100% OK)
-└── README.md            # Este archivo
+## 2. 📂 Estructura del proyecto
+
+El proyecto unificado se encuentra dentro de la carpeta del Tema 5 y utiliza una estructura plana en `src` para facilitar la importación de módulos de ambas partes:
+
+```text
+Tema 5/
+└── 5 Lexer/
+    ├── ejemplos/
+    │   └── ejemplo_errores.uneg   # 📝 Código de prueba con errores intencionales
+    ├── src/
+    │   ├── __pycache__/         # 🗑️ Archivos temporales de compilación de Python
+    │   ├── ast_nodos.py         # 🌿 Clases de los nodos del árbol (Asignacion, If, Llamada)
+    │   ├── lexer.py             # ⚙️ Motor principal del Lexer (pipeline híbrido)
+    │   ├── llm_fallback.py      # 🧠 Generador de prompts y simulación del LLM
+    │   ├── main.py              # 🚀 Punto de entrada que orquesta Lexer y Parser
+    │   ├── parser_uneg.py       # 🧩 Motor del Parser Recursivo Descendente LL(1)
+    │   ├── similarity.py        # 📏 Distancia Levenshtein y ratio de confianza
+    │   └── tokens.py            # 🏷️ Tipos de token, dataclass, reglas regex, KEYWORDS
+    ├── test_lexer.py            # 🧪 Suite de pruebas unitarias
+    └── README.md                # 📖 Este archivo
 ```
 
-### ¿Qué hace cada módulo?
+### 🛠️ ¿Qué hace cada módulo?
 
 | Archivo | Responsabilidad |
 |---|---|
@@ -56,10 +66,12 @@ Tema 5/5 Lexer/
 | `llm_fallback.py` | Construye el prompt para el LLM y simula su respuesta |
 | `lexer.py` | Orquesta todo el pipeline de tokenización híbrida |
 | `main.py` | Ejecuta la demostración y permite procesar archivos `.uneg` |
+| `ast_nodos.py` | Define la estructura de datos jerárquica del AST|
+| `parser_uneg.py` | Valida la gramática y empaqueta los tokens en nodos |
 
 ---
 
-## 3. Cómo ejecutarlo
+## 3. 💻 Cómo ejecutarlo
 
 **No requiere instalar ninguna librería externa.** Solo se necesita Python 3.10 o superior.
 
@@ -102,10 +114,9 @@ Salida esperada de las pruebas:
 
 ---
 
-## 4. Cómo funciona internamente
+## 4. ⚙️ Cómo funciona internamente
 
-### Pipeline de decisión (flujo de cada token)
-
+### A. Pipeline Léxico (Flujo de cada token)
 ```
 Token escaneado del código fuente
          │
@@ -125,6 +136,17 @@ Token escaneado del código fuente
                            └─ ratio < 0.8   →  FALLBACK LLM
                                                Construir prompt contextual
                                                Token(AI_SUGGESTION, sugerencia_IA)
+
+### B. Pipeline Sintáctico (Parser)
+
+Lookahead: Observa el token actual mediante el stream generado por el Lexer.
+
+Derivación: Decide qué regla aplicar (ej. Si ve un IDENTIFIER seguido de =, invoca parse_asignacion()).
+
+Consumo: Valida la estructura estricta (match). Si falla, lanza un SyntaxError.
+
+Construcción: Empaqueta los valores validados en un objeto Nodo y lo añade al Árbol (AST).
+
 ```
 
 ### Fórmula de similitud usada
@@ -139,7 +161,7 @@ ratio = 1 - distancia_Levenshtein(s1, s2) / max(len(s1), len(s2))
 
 ---
 
-## 5. Guía de integración para el Parser
+## 5. 🔗 Guía de integración de Tokens
 
 > **Esta sección está dirigida al compañero responsable del Parser Recursivo Descendente.**
 
@@ -259,7 +281,7 @@ for tok in tokens:
 
 ---
 
-## 6. Referencia completa de tokens
+## 6. 🔣 Referencia completa de tokens
 
 ### Operadores reconocidos
 
@@ -290,7 +312,7 @@ for tok in tokens:
 
 ---
 
-## 7. Palabras clave reconocidas por UnegScript
+## 7. 🔑 Palabras clave reconocidas por UnegScript
 
 El lexer reconoce exactamente estas palabras reservadas. Si el parser intenta hacer `consume('KEYWORD')` y espera una de ellas, debe estar en esta lista:
 
@@ -305,7 +327,7 @@ global   nonlocal del      is       assert
 
 ---
 
-## 8. Resultados de pruebas de ejecución
+## 8.🏆 Resultados de pruebas de ejecución (Lexer + Parser)
 
 ### Caso de prueba oficial requerido
 
