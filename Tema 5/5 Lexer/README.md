@@ -1,8 +1,10 @@
 # 🚀 Sistema Híbrido para UnegScript: Lexer y Parser — Documentación Completa
 
-> 🏛️ **Materia:** Lenguaje y Compiladores · Tema 5: Análisis Sintáctico
-> 👥 **Componentes:** Analizador Léxico Híbrido (Parte A) + Parser Descendente y AST (Parte B)
-> 🐍 **Lenguaje:** Python 3.x (solo librería estándar, sin dependencias externas)
+**🏛️ Materia:** Lenguaje y Compiladores · Tema 5: Análisis Sintáctico
+
+**👥 Componentes:** Analizador Léxico Híbrido (Parte A) + Parser Descendente y AST (Parte B)
+
+**🐍 Lenguaje:** Python 3.x (solo librería estándar, sin dependencias externas)
 
 ---
 
@@ -137,7 +139,10 @@ Token escaneado del código fuente
                                                Construir prompt contextual
                                                Token(AI_SUGGESTION, sugerencia_IA)
 
+```
+
 ### B. Pipeline Sintáctico (Parser)
+```
 
 Lookahead: Observa el token actual mediante el stream generado por el Lexer.
 
@@ -340,47 +345,55 @@ if x > 3 prnt(x) else prnt("no")
 **Salida completa verificada del programa:**
 ```
 ======================================================================
-  DEMO LEXER HÍBRIDO UNEGSCRIPT (REQUERIMIENTO 1)
+  DEMO SISTEMA HÍBRIDO UNEGSCRIPT (REQUERIMIENTO 5)
 ======================================================================
 
 [1] Código fuente de entrada con errores intencionales:
+--------------------------------------------------
   Line 1: pront x = 5
   Line 2: if x > 3 prnt(x) else prnt("no")
 
 [2] Lista de Tokens Producidos (17 tokens):
+--------------------------------------------------
   Token(CORRECTED, 'print', L1:C1) [auto-corregido de 'pront', conf=0.80]
   Token(IDENTIFIER, 'x',    L1:C7)
   Token(OPERATOR,   '=',    L1:C9)
   Token(NUMBER,     '5',    L1:C11)
-  Token(KEYWORD,    'if',   L2:C1)
-  Token(IDENTIFIER, 'x',    L2:C4)
-  Token(OPERATOR,   '>',    L2:C6)
-  Token(NUMBER,     '3',    L2:C8)
-  Token(CORRECTED,  'print',L2:C10) [auto-corregido de 'prnt', conf=0.80]
-  Token(DELIMITER,  '(',    L2:C14)
-  Token(IDENTIFIER, 'x',    L2:C15)
-  Token(DELIMITER,  ')',    L2:C16)
-  Token(KEYWORD,    'else', L2:C18)
+  ...
   Token(CORRECTED,  'print',L2:C23) [auto-corregido de 'prnt', conf=0.80]
   Token(DELIMITER,  '(',    L2:C27)
   Token(STRING,     '"no"', L2:C28)
   Token(DELIMITER,  ')',    L2:C32)
 
 [3] Correcciones y Sugerencias del Pipeline Híbrido:
+--------------------------------------------------
   * Sugerencia: 'pront' -> 'print' (auto-corregido, conf=0.80)
   * Sugerencia: 'prnt'  -> 'print' (auto-corregido, conf=0.80)
   * Sugerencia: 'prnt'  -> 'print' (auto-corregido, conf=0.80)
 
-[4] Salida consumible por el Parser Recursivo Descendente:
-  Stream = [('KEYWORD','print'),('IDENTIFIER','x'),('OPERATOR','='),('NUMBER','5'),
-            ('KEYWORD','if'),('IDENTIFIER','x'),('OPERATOR','>'),('NUMBER','3'),
-            ('KEYWORD','print'),('DELIMITER','('),('IDENTIFIER','x'),('DELIMITER',')'),
-            ('KEYWORD','else'),('KEYWORD','print'),('DELIMITER','('),
-            ('STRING','"no"'),('DELIMITER',')')]
+[4] Salida simplificada consumible por el Parser Recursivo Descendente:
+--------------------------------------------------
+  Stream = [('KEYWORD', 'print'), ('IDENTIFIER', 'x'), ('OPERATOR', '='), ...]
 
-[5] Mediciones de Rendimiento:
-  Tiempo total de tokenización léxica híbrida: ~2.05 ms
+[5] AST ESTRUCTURADO (Salida del Parser):
+--------------------------------------------------
+  Asignacion(variable='x', valor=5)
+  If(condicion=x > 3, then=LlamadaFuncion(nombre='print', args=x), else=LlamadaFuncion(nombre='print', args="no"))
+
+[6] Mediciones de Rendimiento:
+--------------------------------------------------
+  • Tiempo total de ejecución (Lexer + Parser): ~2.1500 ms
+======================================================================
 ```
+### 9. 🌳 Anexo: Árbol de Sintaxis Abstracta (AST)
+```
+El parser genera una estructura orientada a objetos para validar la gramática de UnegScript. Los nodos principales soportados actualmente son:
+
+| Nodo | Componentes Guardados | Ejemplo Estructural |
+|---|---|---|
+| `NodoAsignacion` | Identificador, Expresión/Valor | `x = 5` |
+| `NodoIf` | Condición, Cuerpo True, Cuerpo False | `if x > 3 ... else ...` |
+| `NodoLlamada` | Nombre de Función, Argumentos | `print("no")` |
 
 ### Análisis de corrección por token
 
