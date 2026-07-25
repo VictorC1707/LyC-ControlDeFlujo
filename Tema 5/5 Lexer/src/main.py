@@ -50,9 +50,13 @@ def run_demo():
     parser_stream = lexer.get_parser_stream()
     print(f"  Stream = {parser_stream}")
 
-    # --- FASE 2: PARSER (TU APORTE) ---
+    # --- FASE 2: PARSER ---
     print("\n[5] AST ESTRUCTURADO (Salida del Parser):")
     print("-" * 70)
+    
+    # Iniciamos el medidor interno solo para Parser
+    start_parser_time = time.perf_counter()
+    
     parser = ParserUneg(parser_stream)
     try:
         ast = parser.parse_programa()
@@ -62,11 +66,17 @@ def run_demo():
         print(f"  FALLO DE SINTAXIS: {error}")
 
     end_time = time.perf_counter()
-    execution_time_ms = (end_time - start_time) * 1000
+    
+    # Cálculos de tiempos separados
+    tiempo_total_ms = (end_time - start_time) * 1000
+    tiempo_parser_ms = (end_time - start_parser_time) * 1000
+    tiempo_lexer_ms = tiempo_total_ms - tiempo_parser_ms
 
     print("\n[6] Mediciones de Rendimiento:")
     print("-" * 50)
-    print(f"  • Tiempo total de ejecución (Lexer + Parser): {execution_time_ms:.4f} ms")
+    print(f"  • Tiempo Fase A (Lexer Híbrido):  {tiempo_lexer_ms:.4f} ms")
+    print(f"  • Tiempo Fase B (Parser y AST):   {tiempo_parser_ms:.4f} ms")
+    print(f"  • Tiempo TOTAL de ejecución:      {tiempo_total_ms:.4f} ms")
     print("=" * 70)
 
 
