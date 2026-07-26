@@ -1,0 +1,16 @@
+{
+  "name": "4",
+  "version": "1.0.0",
+  "description": "Este repositorio contiene la implementación de un analizador léxico y sintáctico (Lexer y Parser) desarrollado con ANTLR4 para procesar archivos `docker-compose.yml`. El objetivo principal es validar la jerarquía de las interfaces de red (`networks`, `driver`, `ipam`, `config`) y llevar a cabo un experimento de carga multilenguaje para la asignatura de Lenguaje y Compiladores (UNEG).",
+  "main": "DockerComposeLexer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "antlr4": "^4.13.2"
+  }
+}
